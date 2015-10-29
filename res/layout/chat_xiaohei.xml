@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+   >
+    
+    <RelativeLayout 
+        android:id="@+id/rl_layout"
+  			android:layout_width="fill_parent"
+  			android:layout_height="0dp"
+  			android:background="@drawable/title_bar"
+  			android:gravity="center_vertical"  > 
+		</RelativeLayout>
+    
+	<ListView
+	    android:id="@+id/listview"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_above="@+id/rl_bottom"
+	    android:layout_alignParentTop="true"
+	    android:cacheColorHint="#0000"
+	    android:divider="@null"
+	    android:dividerHeight="5dp"
+	    android:scrollbarStyle="outsideOverlay"
+	    android:stackFromBottom="true" 
+	    android:background="@drawable/chat_bg_default"/>
+
+   <RelativeLayout
+       android:id="@+id/rl_bottom"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_above="@+id/bottom"
+       android:background="@drawable/chat_footer_bg" >
+        
+        <Button
+        android:id="@+id/btn_send"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:text="发送"
+        android:background="@drawable/chat_send_btn" />
+         
+        
+        <EditText
+        android:id="@+id/et_sendmessage"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_toLeftOf="@id/btn_send"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/login_edit_normal"
+        android:layout_centerVertical="true"
+        android:singleLine="true"
+        android:textSize="18sp"/>
+         
+    </RelativeLayout>
+    <RelativeLayout
+         android:id="@+id/bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true" >
+
+        <Button
+            android:id="@+id/btn_sos"
+            android:layout_width="fill_parent"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:text="一键求助"
+            android:textSize="25sp" 
+            android:textColor="@color/red"
+            android:background="@drawable/chat_send_btn"/>
+        
+        </RelativeLayout>
+        
+   
+    
+</RelativeLayout>

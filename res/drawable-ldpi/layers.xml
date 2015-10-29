@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:drawable="@drawable/about_photo_back">
+    </item>
+    <item
+        android:drawable="@drawable/demo1"
+        android:bottom="6dp"
+        android:left="3dp"
+        android:right="3dp"
+        android:top="4dp">
+    </item>
+
+</layer-list>

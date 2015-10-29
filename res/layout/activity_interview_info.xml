@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+    android:background="@color/ask_back"
+    android:orientation="vertical"
+    tools:context=".ListActivity" >
+
+    <LinearLayout
+        android:id="@+id/top_head"
+        android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+        android:background="@drawable/head_back"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:text="interview_info_title"
+            android:textColor="@color/personal_yellow"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            tools:context=".ListActivity" >
+
+            <LinearLayout
+    android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/reply"
+                android:orientation="horizontal" >
+
+                
+                
+            </LinearLayout>
+
+            <EditText
+android:layout_width="fill_parent"
+	android:layout_height="wrap_content"                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/comment" >
+            </EditText>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wellgood.activity"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="16" />
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" >
+    </uses-permission>
+        <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <application
+        android:name="com.wellgood.application.APP"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.wellgood.activity.APPStart"
+            android:label="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.wellgood.activity.MainActivity"
+            android:label="@string/app_name" >
+               	  <intent-filter>
+      	      <action android:name="com.wellgood.activity.MainActivity"/>
+      	      <category android:name="android.intent.category.DEFAULT" />
+      	      <!--  android.intent.category.DEFAULT 必须加上这个,否则自定义的action无法启动-->
+      	      </intent-filter>
+            
+            
+        </activity>
+        <activity
+            android:name="com.wellgood.fragment.WallView"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.wellgood.activity.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+        <activity
+            android:name="com.wellgood.activity.CountCenterActivity"
+            android:label="@string/title_activity_count_center" 
+             >  
+        </activity>
+           <activity
+            android:name="com.wellgood.activity.ListActivity"
+            android:label="@string/title_activity_count_center" 
+             >  
+        </activity>
+             <activity
+            android:name="com.wellgood.activity.SystemSettingActivity"
+            android:label="@string/title_activity_count_center" 
+             >  
+        </activity>
+              <activity
+            android:name="com.wellgood.activity.ShoucangActivity"
+            android:label="@string/title_activity_count_center" 
+             >  
+        </activity>
+                <activity
+            android:name="com.wellgood.activity.FeedBackActivity"
+            android:label="@string/title_activity_count_center" 
+             >  
+        </activity>
+                     <activity
+            android:name="com.wellgood.activity.AboutActivity"
+            android:label="@string/title_activity_count_center" 
+             >  
+        </activity>
+        <activity
+            android:name="com.live.LiveActivity"
+            android:label="@string/title_activity_count_center" 
+             >  
+        </activity>
+             <activity
+            android:name="com.playback.PlayBackActivity"
+            android:label="@string/title_activity_count_center" 
+             >  
+        </activity>
+    </application>
+
+</manifest>

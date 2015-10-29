@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout 
+	android:orientation="vertical" 
+	android:id="@+id/info_qzone_mail" 
+	android:background="@drawable/shape_bg" 
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content" 
+	android:layout_marginLeft="10.0dip" 
+	android:layout_marginTop="10.0dip" 
+	android:layout_marginRight="10.0dip"
+  	xmlns:android="http://schemas.android.com/apk/res/android">
+  	
+
+	    	        <View
+					    android:background="@drawable/shape_line" 
+					    android:layout_width="fill_parent" 
+					    android:layout_height="1.0px" />
+
+
+	    	       
+	    	        <TextView
+	    	            android:id="@+id/textView1"
+	    	            android:layout_width="wrap_content"
+	    	            android:layout_height="wrap_content"
+	    	            android:text="\n    掌上安防\n    为杭州威固网络开发的一款集远程撤布防、线上支付、公共视频预览功能于一体的智能化app.\n \n   公司网址：www.hzwellgood.com.\n"
+	    	            android:textAppearance="?android:attr/textAppearanceMedium" />
+	    	            
+	    	      
+
+	    	
+
+	    	        <LinearLayout
+	    	            android:id="@+id/checkupdate"
+	    	            android:layout_width="fill_parent"
+	    	            android:layout_height="50.0dip"
+	    	            android:background="@drawable/selector_btn"
+	    	            android:clickable="true"
+	    	            android:gravity="center_vertical"
+	    	            android:orientation="horizontal" >
+
+						<!-- android:textColor="#ff545454" -->
+	    	            <TextView
+	    	                android:layout_width="wrap_content"
+	    	                android:layout_height="wrap_content"
+	    	                android:layout_marginLeft="20sp"
+	    	                android:layout_weight="1.0"
+	    	                android:text="检查更新"
+	    	                android:textColor="@color/red"
+	    	                android:textSize="18.0sp" />
+
+	    	            <ImageView
+	    	                android:layout_width="12.0dip"
+	    	                android:layout_height="12.0dip"
+	    	                android:layout_marginRight="10.0dip"
+	    	                android:src="@drawable/into_icon" />
+	    	        </LinearLayout>
+        
+</LinearLayout>
+

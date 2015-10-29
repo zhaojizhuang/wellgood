@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="lightwhite">#fff</color>
+    <color name="black">#000</color>
+     <color name="bg_color">#FAFAFA</color>
+     
+       <color name="white">#ffffff</color>
+    <color name="transparent">#00000000</color>
+     
+     
+    <color name="orange">#ffffdc7e</color>
+    <color name="grey">#ffd3d3d3</color>
+    <color name="green">#008b00</color>
+    <color name="blue">#ff82e0ff</color>
+    <color name="yellow">#fffffbae</color>
+    <color name="red">#fff10800</color>
+    <color name="list_item_pressed">#1A000000</color>
+     
+     
+     
+     
+    <color name="personal_yellow">#fa9a1e</color>
+    <color name="app_back">#323232</color>
+    
+    <color name="personal_text_color">#6c6a6c</color>
+    <color name="home_banner_back">#242423</color>
+	<color name="paper_name">#4146b0</color>
+	<color name="paper_price">#fda306</color>
+	<color name="paper_menu">#242423</color>
+	<color name="paper_menu_text">#73635e</color>
+	<color name="ask_title">#3c3c3a</color>
+	<color name="ask_back">#2f2f2f</color>
+	<color name="main_item_content">#565252</color>
+	<color name="question_info">#c8ba18</color>
+	<color name="paper_list_1">#cbcbc9</color>
+	<color name="paper_list_2">#797882</color>
+	<color name="paper_list_3">#eac721</color>
+	
+	<color name="right_menu">#262626</color>
+</resources>

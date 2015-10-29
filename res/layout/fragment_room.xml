@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.49"
+        android:orientation="vertical" >
+<!-- 上半部分主机信息布局 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/room_info"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/room_info" />
+            <!-- 右上侧布局 -->
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+					<!-- 地址的标题 -->
+                <TextView
+                    android:id="@+id/room_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="华业大厦"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+					<!-- 地址 -->
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="地址：" 
+                     android:textAppearance="?android:attr/textAppearanceMedium" />
+                  <TextView
+                    android:id="@+id/address_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:text="建业路华业大厦" />
+                  <!-- 公司 -->
+                     <TextView
+                    android:id="@+id/company_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="公司：" 
+                     android:textAppearance="?android:attr/textAppearanceMedium" />
+                  <TextView
+                    android:id="@+id/company_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:text="华业大厦物业管理有限公司" />
+
+               
+                
+            </LinearLayout> <!-- 右上侧布局 end-->
+            
+            
+            
+        </LinearLayout><!-- 上半部分主机信息布局 end-->
+	<!--  显示撤布防状态-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_gravity="center_horizontal"
+            >
+                <TextView
+                    android:id="@+id/device_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="主机状态：" 
+                     android:textAppearance="?android:attr/textAppearanceMedium" />
+              <TextView
+                    android:id="@+id/device_status_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+               		android:layout_marginLeft="20sp"
+                    android:textColor="@color/green"
+                    android:text="已撤防" />
+              <TextView
+                    android:id="@+id/device_status_refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+               		android:layout_marginLeft="20sp"
+                    android:textColor="@color/blue"
+                    android:text="刷新状态" />
+            
+        </LinearLayout> <!--  显示撤布防状态-end-->
+        <!-- 撤布防的按钮 -->
+        <LinearLayout
+            android:layout_margin="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_weight="1"
+                android:id="@+id/bufang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="布防" 
+                android:textColor="@color/green"
+                />
+
+            <Button
+                  android:layout_marginLeft="20sp"
+                  android:layout_marginRight="20sp"
+                 android:layout_weight="1"
+                android:id="@+id/chefang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="撤防" 
+                android:textColor="@color/red"/>
+            
+        </LinearLayout>>
+        <!-- 摄像头list -->
+         <FrameLayout android:id="@+id/contain" 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+    
+        <ImageView
+            android:id="@+id/line"
+            android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="13dp"
+            android:background="@drawable/line2" />
+
+        <ListView
+            android:id="@+id/interview_list"
+            android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+            android:cacheColorHint="#00000000"
+            android:divider="@android:color/transparent"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none" >
+        </ListView>
+    </FrameLayout>
+        
+    </LinearLayout>
+
+</LinearLayout>

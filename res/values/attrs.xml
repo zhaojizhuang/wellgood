@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- IndicatorTabBar Attribute -->
+    <declare-styleable name="IndicatorTabBar">
+        <attr name="tab_text_size" format="dimension" />
+        <attr name="tab_text_color" format="color" />
+        <attr name="tab_text_selected_color" format="color" />
+        <attr name="tab_underline_color" format="color" />
+        <attr name="tab_underline_height" format="dimension" />
+        <attr name="tab_max_column" format="integer" />
+    </declare-styleable>
+    <!-- 瀑布流 -->
+    <declare-styleable name="StaggeredGridView">
+        <attr name="column_count_portrait" format="integer" />
+        <attr name="column_count_landscape" format="integer" />
+        <attr name="item_margin" format="dimension" />
+        <attr name="grid_paddingLeft" format="dimension" />
+        <attr name="grid_paddingRight" format="dimension" />
+        <attr name="grid_paddingTop" format="dimension" />
+        <attr name="grid_paddingBottom" format="dimension" />
+    </declare-styleable>
+    
+    <!-- scrollview -->
+       <declare-styleable name="PullScrollView">
+        <attr name="header" format="reference" />
+        <attr name="headerHeight" format="dimension" />
+        <attr name="headerVisibleHeight" format="dimension" />
+    </declare-styleable>
+</resources>
