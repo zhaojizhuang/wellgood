@@ -29,15 +29,12 @@ public class UtilAudioPlay {
      */
     public synchronized static void playAudioFile(Context context, int rawFile) {
 
-        if (null == mSoundPool) {
+    
             mSoundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 100);
             mSoundId = mSoundPool.load(context, rawFile, 1);
 
             new Handler().postDelayed(mPlayAudioTask.new PlayAudioTask1(), 100);
-        } else {
-            if (-1 != mSoundId)
-                mPlayAudioTask.new PlayAudioTask().execute(mSoundId);
-        }
+
     }
 
     private class PlayAudioTask1 implements Runnable {

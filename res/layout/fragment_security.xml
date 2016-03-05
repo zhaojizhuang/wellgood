@@ -1,23 +1,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:widgets="http://schemas.android.com/apk/res/com.wellgood.activity"
+     xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.wellgood.frame.widgets.IndicatorTabBar
-        android:id="@+id/tab_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/bg_color"
-        widgets:tab_text_color="@color/tab_text_color"
-        widgets:tab_text_selected_color="@color/tab_text_selected_color"
-        widgets:tab_text_size="18sp" />
 
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/tab_title_height"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            >
+
+            <info.hoang8f.android.segmented.SegmentedGroup
+                android:id="@+id/segmented3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                segmentedgroup:sc_border_width="1dp"
+                segmentedgroup:sc_corner_radius="5dp"
+                segmentedgroup:sc_tint_color="@color/orange">
+
+                <RadioButton
+                    android:id="@+id/button31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_people"
+                    style="@style/RadioButton" />
+
+                <RadioButton
+                    android:id="@+id/button32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_room"
+                    style="@style/RadioButton" />
+
+            </info.hoang8f.android.segmented.SegmentedGroup>
+
+        </RelativeLayout>
+        
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+        android:layout_below="@id/divider"
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
+        android:layout_height="match_parent"/>
+        
 </LinearLayout>

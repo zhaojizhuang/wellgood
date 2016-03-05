@@ -1,16 +1,115 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+   android:orientation="vertical"
     tools:context=".CountCenterFragment" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/scrollview_header" >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="当前账户余额：90元"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_centerVertical="true"
+            android:text="当前服务类型：专业版套餐 一季度（剩余15天9小时）"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+ <LinearLayout 
+         android:clickable="true"          
+       android:background="@drawable/selector_btn"
+    android:gravity="center_vertical" 
+    android:orientation="horizontal" 
+    android:id="@+id/counter_taocanxuangou" 
+    android:layout_width="fill_parent" 
+    android:layout_height="50.0dip">
+    
+        
+        <TextView 
+        android:textSize="18.0sp" 
+        android:textColor="#ff545454" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft="10.0dip" 
+        android:text="套餐选购" 
+        android:layout_weight="1.0" />
+        
+        <ImageView 
+        android:layout_width="12.0dip" 
+        android:layout_height="12.0dip" 
+        android:layout_marginRight="10.0dip" 
+        android:src="@drawable/into_icon" />
+        
+    </LinearLayout>
+<LinearLayout 
+         android:clickable="true"          
+       android:background="@drawable/selector_btn"
+    android:gravity="center_vertical" 
+    android:orientation="horizontal" 
+    android:id="@+id/counter_zhanghuchongzhi" 
+    android:layout_width="fill_parent" 
+    android:layout_height="50.0dip">
+    
+        
+        <TextView 
+        android:textSize="18.0sp" 
+        android:textColor="#ff545454" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft="10.0dip" 
+        android:text="账户充值" 
+        android:layout_weight="1.0" />
+        
+        <ImageView 
+        android:layout_width="12.0dip" 
+        android:layout_height="12.0dip" 
+        android:layout_marginRight="10.0dip" 
+        android:src="@drawable/into_icon" />
+        
+    </LinearLayout>
+ <LinearLayout 
+         android:clickable="true"          
+       android:background="@drawable/selector_btn"
+    android:gravity="center_vertical" 
+    android:orientation="horizontal" 
+    android:id="@+id/counter_chongzhijilu" 
+    android:layout_width="fill_parent" 
+    android:layout_height="50.0dip">
+    
+        
+        <TextView 
+        android:textSize="18.0sp" 
+        android:textColor="#ff545454" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft="10.0dip" 
+        android:text="充值记录" 
+        android:layout_weight="1.0" />
+        
+        <ImageView 
+        android:layout_width="12.0dip" 
+        android:layout_height="12.0dip" 
+        android:layout_marginRight="10.0dip" 
+        android:src="@drawable/into_icon" />
+        
+    </LinearLayout>
+
+</LinearLayout>

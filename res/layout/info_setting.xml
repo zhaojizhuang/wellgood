@@ -9,7 +9,77 @@
 	android:layout_marginTop="10.0dip" 
 	android:layout_marginRight="10.0dip"
   	xmlns:android="http://schemas.android.com/apk/res/android">
-  	
+  	    <!-- 账户中心 -->
+
+        <LinearLayout 
+             android:clickable="true"          
+       android:background="@drawable/selector_btn"
+        android:gravity="center_vertical" 
+        android:orientation="horizontal" 
+        android:id="@+id/setting_countcenter" 
+        android:layout_width="fill_parent" 
+        android:layout_height="50.0dip">
+        
+            <ImageView 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_marginLeft="10.0dip" 
+            android:src="@drawable/account"/>
+            
+            <TextView 
+            android:textSize="18.0sp"
+            android:textColor="#ff545454" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_marginLeft="10.0dip" 
+            android:text="我的账户" 
+            android:layout_weight="1.0" />
+            
+            <ImageView 
+            android:layout_width="12.0dip" 
+            android:layout_height="12.0dip" 
+            android:layout_marginRight="10.0dip" 
+            android:src="@drawable/into_icon" />
+            
+        </LinearLayout>
+    <View
+    android:background="@drawable/shape_line" 
+    android:layout_width="fill_parent" 
+    android:layout_height="1.0px" />
+        <LinearLayout
+            android:id="@+id/setting_shoucang"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:background="@drawable/selector_btn"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:src="@drawable/setting_shoucang" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:layout_weight="1.0"
+                android:text="我的收藏"
+                android:textColor="#ff545454"
+                android:textSize="18.0sp" />
+
+            <ImageView
+                android:layout_width="12.0dip"
+                android:layout_height="12.0dip"
+                android:layout_marginRight="10.0dip"
+                android:src="@drawable/into_icon" />
+        </LinearLayout>
+                    <View
+    android:background="@drawable/shape_line" 
+    android:layout_width="fill_parent" 
+    android:layout_height="1.0px" />
     <LinearLayout 
          android:clickable="true" 	       
 	   android:background="@drawable/selector_btn"
@@ -23,7 +93,7 @@
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginLeft="10.0dip" 
-        android:src="@drawable/friend_info_qzone" />
+        android:src="@drawable/scan" />
         
         <TextView 
         android:textSize="18.0sp" 
@@ -31,7 +101,7 @@
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginLeft="10.0dip" 
-        android:text="我的行业" 
+        android:text="浏览记录" 
         android:layout_weight="1.0" />
         
         <ImageView 
@@ -46,150 +116,9 @@
     android:background="@drawable/shape_line" 
     android:layout_width="fill_parent" 
     android:layout_height="1.0px" />
-    
-    <LinearLayout 
-         android:clickable="true" 	       
-	   android:background="@drawable/selector_btn"
-    android:gravity="center_vertical" 
-    android:orientation="horizontal" 
-    android:id="@+id/setting_shoucang" 
-    android:layout_width="fill_parent" 
-    android:layout_height="50.0dip">
-    
-        <ImageView 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_marginLeft="10.0dip" 
-        android:src="@drawable/friend_info_mail"/>
-        
-        <TextView 
-        android:textSize="18.0sp"
-        android:textColor="#ff545454" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_marginLeft="10.0dip" 
-        android:text="收藏夹" 
-        android:layout_weight="1.0" />
-        
-        <ImageView 
-        android:layout_width="12.0dip" 
-        android:layout_height="12.0dip" 
-        android:layout_marginRight="10.0dip" 
-        android:src="@drawable/into_icon" />
-        
-    </LinearLayout>
-    <!-- 账户中心 -->
-    <View
-    android:background="@drawable/shape_line" 
-    android:layout_width="fill_parent" 
-    android:layout_height="1.0px" />
-	    <LinearLayout 
-	         android:clickable="true" 	       
-	   android:background="@drawable/selector_btn"
-	    android:gravity="center_vertical" 
-	    android:orientation="horizontal" 
-	    android:id="@+id/setting_countcenter" 
-	    android:layout_width="fill_parent" 
-	    android:layout_height="50.0dip">
+
 	    
-	        <ImageView 
-	        android:layout_width="wrap_content" 
-	        android:layout_height="wrap_content" 
-	        android:layout_marginLeft="10.0dip" 
-	        android:src="@drawable/friend_info_mail"/>
-	        
-	        <TextView 
-	        android:textSize="18.0sp"
-	        android:textColor="#ff545454" 
-	        android:layout_width="wrap_content" 
-	        android:layout_height="wrap_content" 
-	        android:layout_marginLeft="10.0dip" 
-	        android:text="账户中心" 
-	        android:layout_weight="1.0" />
-	        
-	        <ImageView 
-	        android:layout_width="12.0dip" 
-	        android:layout_height="12.0dip" 
-	        android:layout_marginRight="10.0dip" 
-	        android:src="@drawable/into_icon" />
-	        
-	    </LinearLayout>
-	    
-	        <View
-    android:background="@drawable/shape_line" 
-    android:layout_width="fill_parent" 
-    android:layout_height="1.0px" />
-	    <LinearLayout 
-	         android:clickable="true" 	       
-	   android:background="@drawable/selector_btn"
-	    android:gravity="center_vertical" 
-	    android:orientation="horizontal" 
-	    android:id="@+id/setting_systemsetting" 
-	    android:layout_width="fill_parent" 
-	    android:layout_height="50.0dip">
-	    
-	        <ImageView 
-	        android:layout_width="wrap_content" 
-	        android:layout_height="wrap_content" 
-	        android:layout_marginLeft="10.0dip" 
-	        android:src="@drawable/friend_info_mail"/>
-	        
-	        <TextView 
-	        android:textSize="18.0sp"
-	        android:textColor="#ff545454" 
-	        android:layout_width="wrap_content" 
-	        android:layout_height="wrap_content" 
-	        android:layout_marginLeft="10.0dip" 
-	        android:text="系统设置" 
-	        android:layout_weight="1.0" />
-	        
-	        <ImageView 
-	        android:layout_width="12.0dip" 
-	        android:layout_height="12.0dip" 
-	        android:layout_marginRight="10.0dip" 
-	        android:src="@drawable/into_icon" />
-	        
-	    </LinearLayout>
-	       
-	    <View
-    android:background="@drawable/shape_line" 
-    android:layout_width="fill_parent" 
-    android:layout_height="1.0px" />
-	    <LinearLayout 
-	        android:clickable="true" 	       
-	   android:background="@drawable/selector_btn"
-	    android:gravity="center_vertical" 
-	    android:orientation="horizontal" 
-	    android:id="@+id/setting_feedback" 
-	    android:layout_width="fill_parent" 
-	    android:layout_height="50.0dip">
-	    
-	        <ImageView 
-	        android:layout_width="wrap_content" 
-	        android:layout_height="wrap_content" 
-	        android:layout_marginLeft="10.0dip" 
-	        android:src="@drawable/friend_info_mail"/>
-	        
-	        <TextView 
-	        android:textSize="18.0sp"
-	        android:textColor="#ff545454" 
-	        android:layout_width="wrap_content" 
-	        android:layout_height="wrap_content" 
-	        android:layout_marginLeft="10.0dip" 
-	        android:text="意见反馈" 
-	        android:layout_weight="1.0" />
-	        
-	        <ImageView 
-	        android:layout_width="12.0dip" 
-	        android:layout_height="12.0dip" 
-	        android:layout_marginRight="10.0dip" 
-	        android:src="@drawable/into_icon" />
-	        
-	    </LinearLayout>
-	    	        <View
-    android:background="@drawable/shape_line" 
-    android:layout_width="fill_parent" 
-    android:layout_height="1.0px" />
+
 	   <LinearLayout 
 	   android:clickable="true" 	       
 	   android:background="@drawable/selector_btn"
@@ -203,7 +132,7 @@
 	        android:layout_width="wrap_content" 
 	        android:layout_height="wrap_content" 
 	        android:layout_marginLeft="10.0dip" 
-	        android:src="@drawable/friend_info_mail"/>
+	        android:src="@drawable/kaihu"/>
 	        
 	        <TextView 
 	        android:textSize="18.0sp"
@@ -211,7 +140,7 @@
 	        android:layout_width="wrap_content" 
 	        android:layout_height="wrap_content" 
 	        android:layout_marginLeft="10.0dip" 
-	        android:text="关于" 
+	        android:text="开户追踪" 
 	        android:layout_weight="1.0" />
 	        
 	        <ImageView 
@@ -220,6 +149,77 @@
 	        android:layout_marginRight="10.0dip" 
 	        android:src="@drawable/into_icon" />
 	        </LinearLayout>
+            <View
+    android:background="@drawable/shape_line" 
+    android:layout_width="fill_parent" 
+    android:layout_height="1.0px" />
+           
+
+	   <LinearLayout
+	       android:id="@+id/setting_feedback"
+	       android:layout_width="fill_parent"
+	       android:layout_height="50.0dip"
+	       android:background="@drawable/selector_btn"
+	       android:clickable="true"
+	       android:gravity="center_vertical"
+	       android:orientation="horizontal" >
+
+	       <ImageView
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:layout_marginLeft="10.0dip"
+	           android:src="@drawable/help" />
+
+	       <TextView
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:layout_marginLeft="10.0dip"
+	           android:layout_weight="1.0"
+	           android:text="帮助与反馈"
+	           android:textColor="#ff545454"
+	           android:textSize="18.0sp" />
+
+	       <ImageView
+	           android:layout_width="12.0dip"
+	           android:layout_height="12.0dip"
+	           android:layout_marginRight="10.0dip"
+	           android:src="@drawable/into_icon" />
+	   </LinearLayout>
+        <View
+    android:background="@drawable/shape_line" 
+    android:layout_width="fill_parent" 
+    android:layout_height="1.0px" />
+
+	   <LinearLayout
+	       android:id="@+id/setting_systemsetting"
+	       android:layout_width="fill_parent"
+	       android:layout_height="50.0dip"
+	       android:background="@drawable/selector_btn"
+	       android:clickable="true"
+	       android:gravity="center_vertical"
+	       android:orientation="horizontal" >
+
+	       <ImageView
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:layout_marginLeft="10.0dip"
+	           android:src="@drawable/setting_systemsetting" />
+
+	       <TextView
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:layout_marginLeft="10.0dip"
+	           android:layout_weight="1.0"
+	           android:text="系统设置"
+	           android:textColor="#ff545454"
+	           android:textSize="18.0sp" />
+
+	       <ImageView
+	           android:layout_width="12.0dip"
+	           android:layout_height="12.0dip"
+	           android:layout_marginRight="10.0dip"
+	           android:src="@drawable/into_icon" />
+	   </LinearLayout>
         
 </LinearLayout>
 

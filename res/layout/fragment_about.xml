@@ -22,11 +22,23 @@
 	    	            android:id="@+id/textView1"
 	    	            android:layout_width="wrap_content"
 	    	            android:layout_height="wrap_content"
-	    	            android:text="\n    掌上安防\n    为杭州威固网络开发的一款集远程撤布防、线上支付、公共视频预览功能于一体的智能化app.\n \n   公司网址：www.hzwellgood.com.\n"
+	    	            android:text="\n    智慧生活\n    为东保物联科技开发的一款集远程撤布防、线上支付、公共视频预览功能于一体的智能化app. "
 	    	            android:textAppearance="?android:attr/textAppearanceMedium" />
 	    	            
 	    	      
 
+                    <View
+                        android:background="@drawable/shape_line" 
+                        android:layout_width="fill_parent" 
+                        android:layout_height="1.0px" />
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="\n    ----联系我们\n    邮箱：3327908356@qq.com\n    客服电话：0579-86810110 \n    传真：0579-86711333 \n    微信公众号：zjdb110 
+\n    公司地址：\n    浙江省东阳市中山路398号\n    "
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 	    	
 
 	    	        <LinearLayout

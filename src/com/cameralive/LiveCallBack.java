@@ -1,4 +1,4 @@
-package com.live;
+package com.cameralive;
 
 /**
  * 预览回调接口

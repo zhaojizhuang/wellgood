@@ -1,13 +1,12 @@
 package com.wellgood.activity;
 
-import com.wellgood.fragment.CountCenterFragment;
-import com.wellgood.fragment.SystemSettingFragment;
-
-import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.MenuItem;
+
+import com.wellgood.application.APP;
+import com.wellgood.fragment.SystemSettingFragment;
 
 public class SystemSettingActivity extends Activity {
 
@@ -15,6 +14,7 @@ public class SystemSettingActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_systemsetting);
+		APP.getIns().addActivity(this);
 		//µº∫Ω¿∏œ‘ æ∑µªÿ
 		ActionBar actionBar = getActionBar();
 

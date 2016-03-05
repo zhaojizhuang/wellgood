@@ -1,14 +1,17 @@
-package com.wellgood.frame.indicator.selectView;
+/*package com.wellgood.frame.indicator.selectView;
 
-import com.wellgood.fragment.*;
+import com.wellgood.fragment.BaseFragment;
+import com.wellgood.fragment.AskHelp;
+import com.wellgood.fragment.Room;
 
 
 public class SecuritySelect  {
 
 
     public static BaseFragment select(int position) {
-        People people=new People();
+        AskHelp people=new AskHelp();
         Room room=new Room();
+    
         switch (position) {
 		case 0:
 			 return people;
@@ -16,10 +19,11 @@ public class SecuritySelect  {
 			 return room;
 		
         }
-		return people;
+		return room;
     }
 
 
 
 
 }
+*/

@@ -1,8 +1,8 @@
 package com.playback;
 
-import com.hik.mcrsdk.rtsp.ABS_TIME;
-
 import android.view.SurfaceView;
+
+import com.hik.mcrsdk.rtsp.ABS_TIME;
 
 
 /**

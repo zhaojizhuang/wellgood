@@ -1,25 +1,19 @@
 package com.wellgood.fragment;
 
+import android.app.Fragment;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.android.pc.ioc.inject.InjectBinder;
 import com.android.pc.ioc.inject.InjectInit;
 import com.android.pc.ioc.inject.InjectView;
 import com.android.pc.ioc.view.listener.OnClick;
 import com.android.pc.util.Handler_Inject;
 import com.wellgood.activity.R;
-import com.wellgood.adapter.InterviewAdapter;
 import com.wellgood.update.UpdateManager;
-
-import android.os.Bundle;
-import android.R.anim;
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class AboutFragment extends Fragment {
 	//×¢½â

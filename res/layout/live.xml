@@ -2,31 +2,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#111111"
     tools:context=".LiveActivity" >
-
-    <RelativeLayout
-        android:id="@+id/SurfaceViewLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/cloud_area"
-        android:layout_centerInParent="false"
-        android:layout_marginTop="6dp" 
-        android:layout_alignParentTop="true"
-        >
-
-        <SurfaceView
-            android:id="@+id/surfaceView"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"/>
-
-        <ProgressBar
-            android:id="@+id/liveProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
-    </RelativeLayout>
-    <RelativeLayout
+  <!--   <RelativeLayout
         android:id="@+id/cloud_area"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -76,7 +54,7 @@
     <LinearLayout
         android:id="@+id/ControlLayout"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" >
 
@@ -95,6 +73,42 @@
             android:layout_weight="1"
             android:singleLine="true"
             android:text="停止" />
-    </LinearLayout>
+    </LinearLayout> -->
+
+    <RelativeLayout
+        android:id="@+id/SurfaceViewLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentLeft="true"
+          android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" 
+        android:layout_alignParentTop="true" >
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="fill_parent"
+            android:layout_height="300dp"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/textView1" />
+
+        <ProgressBar
+            android:id="@+id/liveProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" 
+            />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="实时预览"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/blue" />
+    </RelativeLayout>
 
 </RelativeLayout>

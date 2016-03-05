@@ -9,13 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-/*
- * Author: pan Email:gdpancheng@gmail.com
- * Created Date:2013-9-15
- * Copyright @ 2013 BU
- * Description: 类描�?
+
+/**
+ * @author Administrator
  *
- * History:
  */
 public abstract class CommonAdapter extends BaseAdapter {
 
@@ -25,10 +22,10 @@ public abstract class CommonAdapter extends BaseAdapter {
 	/**
 	 * 记得注销
 	 */
-	private int count = 20;
+/*	private int count = 10;
 	public void setCount(int count) {
 		this.count = count;
-	}
+	}*/
 
 	public CommonAdapter() {
     }
@@ -38,10 +35,10 @@ public abstract class CommonAdapter extends BaseAdapter {
 	    this.data = data;
     }
 	
-	@Override
+/*	@Override
 	public int getCount() {
 		return count;
-	}
+	}*/
 
 	public Object getItem(int position) {
 		return position;

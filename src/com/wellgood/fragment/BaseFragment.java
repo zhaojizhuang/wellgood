@@ -1,12 +1,10 @@
 package com.wellgood.fragment;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -14,8 +12,6 @@ import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.android.pc.ioc.event.EventBus;
-import com.android.pc.util.Handler_Inject;
 import com.wellgood.activity.R;
 
 /*
@@ -32,26 +28,25 @@ public class BaseFragment extends Fragment {
 	protected Activity activity;
 	protected View progress;
 	protected LinearLayout progress_container;
+	/** 用于设置 viewpaper的indicator的图标 **/
+	//private String title;
+	private int iconId;
+	
+//	    public String getTitle() {
+//	        return title;
+//	    }
+//
+//	    public void setTitle(String title) {
+//	        this.title = title;
+//	    }
 
-/*	public View.OnTouchListener on = new View.OnTouchListener() {
-		@Override
-		public boolean onTouch(View v, MotionEvent event) {
-			EventBus eventBus = EventBus.getDefault();
-			SlidingEntity slidingEntity = new SlidingEntity();
-			switch (event.getAction()) {
-			case MotionEvent.ACTION_DOWN:
-				slidingEntity.setSlidingEnable(false);
-				eventBus.post(slidingEntity);
-				break;
-			case MotionEvent.ACTION_UP:
-				slidingEntity.setSlidingEnable(true);
-				slidingEntity.setViewPage(true);
-				eventBus.post(slidingEntity);
-				break;
-			}
-			return false;
-		}
-	};*/
+	    public int getIconId() {
+	        return iconId;
+	    }
+
+	    public void setIconId(int iconId) {
+	        this.iconId = iconId;
+	    }
 
 	@Override
 	public void onAttach(Activity activity) {

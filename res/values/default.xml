@@ -5,9 +5,10 @@
     <dimen name="tab_text_size">15sp</dimen>
 
     <color name="tab_text_color">#AFAFAF</color>
-    <color name="tab_text_selected_color">#EE6E6C</color>
-    <color name="tab_underline_color">#FA3E41</color>
-
+<!--     <color name="tab_text_selected_color">#EE6E6C</color>
+    <color name="tab_underline_color">#FA3E41</color> -->
+    <color name="tab_text_selected_color">#ff9C00</color>
+    <color name="tab_underline_color">#ff9C00</color>
     <dimen name="tab_underline_height">8px</dimen>
 
     <integer name="tab_max_column">3</integer>

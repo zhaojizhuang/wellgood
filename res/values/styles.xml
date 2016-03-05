@@ -23,9 +23,17 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
+         <item name="android:windowTitleSize">40dip</item>    
+         <item name="android:windowTitleBackgroundStyle">@style/TitleBackgroundColor</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
-
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>  
+    </style>     
+   <style name="AnimationActivity" parent="@android:style/Animation.Activity" mce_bogus="1">  
+    <item name="android:activityOpenEnterAnimation">@anim/anim_enter</item>  
+    <item name="android:activityOpenExitAnimation">@anim/anim_exit</item>  
+    <item name="android:activityCloseEnterAnimation">@anim/back_enter</item>  
+    <item name="android:activityCloseExitAnimation">@anim/back_exit</item>  
+</style>
     <style name="chat_text_date_style">
         <item name="android:padding">2dp</item>
         <item name="android:textColor">#ffffff</item>
@@ -50,88 +58,26 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <!-- ####################以上内容全部来自搬运 ############################################ -->
 
-
-    <!--
-         <style name="AnimFade" parent="@android:style/Animation.Activity">  
-    	<item name="android:activityOpenEnterAnimation">@anim/fade_in</item>  
-    	<item name="android:activityOpenExitAnimation">@anim/hold</item>        
-    	<item name="android:activityCloseEnterAnimation">@anim/fade_in</item>  
-    	<item name="android:activityCloseExitAnimation">@anim/fade_out</item> 
-	</style>
-	<style name="AnimBottom" parent="@android:style/Animation">  
-    	<item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
-        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
-	</style>
-	<style name="AnimTop" parent="@android:style/Animation">  
-    	<item name="android:windowEnterAnimation">@anim/push_top_in</item>
-        <item name="android:windowExitAnimation">@anim/push_top_out</item>
-	</style>
-	<style name="AnimTop2" parent="@android:style/Animation">  
-    	<item name="android:windowEnterAnimation">@anim/push_top_in2</item>
-        <item name="android:windowExitAnimation">@anim/push_top_out2</item>
-	</style>
-	<style name="AnimHead" parent="@android:style/Animation">  
-    	<item name="android:windowEnterAnimation">@anim/head_in</item>
-        <item name="android:windowExitAnimation">@anim/head_out</item>
-	</style>
-	
-   	<style name="Anim_style" parent="android:Theme.NoTitleBar.Fullscreen">         
-        <item name="android:windowAnimationStyle">@style/AnimFade</item>       
-	</style>  
-	
-	<style name="Anim_style2" parent="android:Theme.NoTitleBar">         
-        <item name="android:windowAnimationStyle">@style/AnimFade</item>       
-	</style> 
-	
-	<style name="Anim_style_title" parent="android:Theme">         
-        <item name="android:windowAnimationStyle">@style/AnimFade</item> 
-        <item name="android:windowTitleSize">50dp</item>  
-        <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>      
-	</style>
-	
-	
-	<style name="MyDialogStyle">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
-        <item name="android:backgroundDimEnabled">true</item>
-    </style>
-    
-    <style name="MyDialogStyleBottom" parent="android:Theme.Dialog" >
-        <item name="android:windowAnimationStyle">@style/AnimBottom</item>
-        <item name="android:windowFrame">@null</item>边框
-        <item name="android:windowIsFloating">true</item>是否浮现在activity之上
-        <item name="android:windowIsTranslucent">true</item>半透明
-        <item name="android:windowNoTitle">true</item>无标题
-        <item name="android:windowBackground">@android:color/transparent</item>背景透明
-        <item name="android:backgroundDimEnabled">true</item>模糊        
-     </style>
+     <!--   <item name="android:windowTitleSize">40dip</item>     -->
      
-     <style name="MyDialogStyleTop" parent="android:Theme.Dialog" >
-        <item name="android:windowAnimationStyle">@style/AnimTop2</item>
-        <item name="android:windowFrame">@null</item>边框
-        <item name="android:windowIsFloating">true</item>是否浮现在activity之上
-        <item name="android:windowIsTranslucent">true</item>半透明
-        <item name="android:windowNoTitle">true</item>无标题
-        <item name="android:windowBackground">@android:color/transparent</item>背景透明
-        <item name="android:backgroundDimEnabled">false</item>模糊        
-     </style>
      
-    <style name="HeadScale" parent="android:Theme.Dialog" >
-        <item name="android:windowAnimationStyle">@style/AnimHead</item>
-        <item name="android:windowFrame">@null</item>边框
-        <item name="android:windowIsFloating">true</item>是否浮现在activity之上
-        <item name="android:windowIsTranslucent">true</item>半透明
-        <item name="android:windowNoTitle">true</item>无标题
-        <item name="android:backgroundDimEnabled">false</item>模糊
-     </style>
-    -->
+<!--      自定义的标题 -->
+     <style name="titlestyle" parent="AppBaseTheme" >
+         <!-- 自定义图标indicator -->
+         <item name="tabView">@style/MyTabView</item>
+         <item name="android:actionBarStyle">@style/TitleBackgroundColor</item>
+     </style>
+<!--      标题栏背景 -->
+         <style name="TitleBackgroundColor" parent="android:Widget.ActionBar">
+         <item name="android:background">#F0F0F0</item>
+          <item name="android:titleTextStyle">@style/AcBar_titleStyle</item>  
+     </style>
+<!--      标题栏文字 -->
+     <style name="AcBar_titleStyle">  
+        <item name="android:textSize">18sp</item>  
+        <item name="android:textColor">#CE7031</item>  
+    </style>  
 
     <style name="LoginFormContainer">
         <item name="android:layout_width">match_parent</item>
@@ -139,4 +85,27 @@
         <item name="android:padding">16dp</item>
     </style>
 
+    
+    <!-- 自定义图标 -->
+      <style name="MyTabView" parent="TabView">
+        <item name="iconWidth">28dp</item>
+        <item name="iconHeight">28dp</item>
+    </style>
+        <style name="Theme.IndicatorDefault" parent="android:Theme">
+        <item name="tabView">@style/TabView</item>
+    </style>
+
+    <style name="TabView">
+        <item name="android:gravity">bottom|center_horizontal</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:layout_height">65dp</item>
+        <item name="android:textColor">@color/tab_text_selector</item>
+        <item name="android:textSize">1sp</item>
+        <item name="iconWidth">55dp</item>
+        <item name="iconHeight">55dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:drawablePadding">2dp</item>
+    </style>
 </resources>

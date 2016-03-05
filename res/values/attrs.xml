@@ -10,21 +10,25 @@
         <attr name="tab_underline_height" format="dimension" />
         <attr name="tab_max_column" format="integer" />
     </declare-styleable>
-    <!-- 瀑布流 -->
-    <declare-styleable name="StaggeredGridView">
-        <attr name="column_count_portrait" format="integer" />
-        <attr name="column_count_landscape" format="integer" />
-        <attr name="item_margin" format="dimension" />
-        <attr name="grid_paddingLeft" format="dimension" />
-        <attr name="grid_paddingRight" format="dimension" />
-        <attr name="grid_paddingTop" format="dimension" />
-        <attr name="grid_paddingBottom" format="dimension" />
-    </declare-styleable>
     
     <!-- scrollview -->
        <declare-styleable name="PullScrollView">
         <attr name="header" format="reference" />
         <attr name="headerHeight" format="dimension" />
         <attr name="headerVisibleHeight" format="dimension" />
+    </declare-styleable>
+    <!-- 图标的indicator -->
+        <attr name="tabView" format="reference"/>
+    <attr name="iconWidth" format="dimension"/>
+    <attr name="iconHeight" format="dimension"/>
+
+    <declare-styleable name="TabView">
+        <attr name="iconWidth"/>
+        <attr name="iconHeight"/>
+    </declare-styleable>
+        <declare-styleable name="ExtendedListView">
+        <attr name="scrollBarPanel" format="reference" />
+        <attr name="scrollBarPanelInAnimation" format="reference" />
+        <attr name="scrollBarPanelOutAnimation" format="reference" />
     </declare-styleable>
 </resources>

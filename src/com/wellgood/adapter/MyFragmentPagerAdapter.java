@@ -1,4 +1,4 @@
-package com.wellgood.adapter;
+/*package com.wellgood.adapter;
 
 import java.util.ArrayList;
 
@@ -35,3 +35,4 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
 }
+*/

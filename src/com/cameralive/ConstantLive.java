@@ -1,7 +1,7 @@
-package com.live;
+package com.cameralive;
 
 /**
- * 预览模块用到的常量
+ * 预览模块用到的常�?
  * 
  * @author huangweifeng
  * @Data 2013-10-21
@@ -46,11 +46,11 @@ public class ConstantLive {
 	 * */
 	public static final int SD_CARD_UN_USEABLE = ERR_BASE + 8;
 	/**
-	 * SD卡空间不足
+	 * SD卡空间不�?
 	 * */
 	public static final int SD_CARD_SIZE_NOT_ENOUGH = ERR_BASE + 9;
 	/**
-	 * 非播放状态不能抓拍
+	 * 非播放状态不能抓�?
 	 */
 	public static final int CAPTURE_FAILED_NPLAY_STATE = ERR_BASE + 10;
 	/**
@@ -58,11 +58,11 @@ public class ConstantLive {
 	 * */
 	public static final int MAG = 2;
 	/**
-	 * 主码流标签
+	 * 主码流标�?
 	 */
 	public static final int MAIN_STREAM = 0;
 	/**
-	 * 子码流标签
+	 * 子码流标�?
 	 * */
 	public static final int SUB_STREAM = 1;
 

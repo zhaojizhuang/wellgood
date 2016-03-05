@@ -1,11 +1,11 @@
 package com.wellgood.fragment;
 
-import com.wellgood.activity.R;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.wellgood.activity.R;
 
 /*
  * Author: pan Email:gdpancheng@gmail.com

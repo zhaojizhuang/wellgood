@@ -6,6 +6,7 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,7 +15,6 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,30 +22,42 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.Toast;
 
 import com.android.pc.ioc.inject.InjectInit;
 import com.android.pc.util.Handler_Inject;
+import com.cameralive.LiveActivity;
 import com.hikvision.vmsnetsdk.CameraInfo;
 import com.hikvision.vmsnetsdk.ControlUnitInfo;
 import com.hikvision.vmsnetsdk.LineInfo;
 import com.hikvision.vmsnetsdk.RegionInfo;
 import com.hikvision.vmsnetsdk.ServInfo;
-import com.hikvision.vmsnetsdk.VMSNetSDK;
-import com.live.LiveActivity;
 import com.playback.PlayBackActivity;
 import com.wellgood.activity.R;
-import com.wellgood.frame.grid.StaggeredGridView;
-import com.wellgood.frame.grid.Adapter.SampleAdapter;
+import com.wellgood.adapter.GridItem;
+import com.wellgood.adapter.StickyGridAdapter;
+import com.wellgood.application.APP;
+import com.wellgood.fenleicamera.ImagesResource;
+import com.zjz.pulltorefresh.PullToRefreshView;
+import com.zjz.pulltorefresh.PullToRefreshView.OnFooterRefreshListener;
+import com.zjz.pulltorefresh.PullToRefreshView.OnHeaderRefreshListener;
 
-public class CameraFragment extends Fragment  implements AbsListView.OnItemClickListener{
+public class CameraFragment extends Fragment  implements AbsListView.OnItemClickListener,OnHeaderRefreshListener,
+OnFooterRefreshListener{
+	
+	private int[] images=new int[]{R.drawable.c1,R.drawable.c2,R.drawable.c3,R.drawable.c4,R.drawable.c5};
+	
+	
+	
+	
 	public static String CLASS_NAME="CameraFragment";
     public static final String SAVED_DATA_KEY = "SAVED_DATA";
     private static final int FETCH_DATA_TASK_DURATION = 500;
 
-    private StaggeredGridView mGridView;
-    private SampleAdapter mAdapter;
-
+    private GridView mGridView;
+    private StickyGridAdapter mAdapter;
+    private List<GridItem>    listdata;
     /** 发送消息的对象 */
     private MsgHandler          handler       = new MsgHandler();
     /** 用户名输入框 */
@@ -77,138 +89,225 @@ public class CameraFragment extends Fragment  implements AbsListView.OnItemClick
     List<ControlUnitInfo> ctrlUnitList = new ArrayList<ControlUnitInfo>();
     /**摄像头列表**/
     List<CameraInfo> cameraList = new ArrayList<CameraInfo>();
+    List<CameraInfo> cameraList1 = new ArrayList<CameraInfo>();
+    List<CameraInfo> cameraList2 = new ArrayList<CameraInfo>();
+    List<CameraInfo> cameraList3 = new ArrayList<CameraInfo>();
+    List<CameraInfo> cameraList4 = new ArrayList<CameraInfo>();
+    List<CameraInfo> cameraList5 = new ArrayList<CameraInfo>();
+    List<CameraInfo> cameraList6 = new ArrayList<CameraInfo>();
+    List<CameraInfo> cameraList7 = new ArrayList<CameraInfo>();
+    List<CameraInfo> cameraList8 = new ArrayList<CameraInfo>();
+    List<CameraInfo> cameraList9 = new ArrayList<CameraInfo>();
     /**区域列表**/
     List<RegionInfo> regionList=new ArrayList<RegionInfo>();
-    
-    String  servAddr = "http://112.12.17.3";
-    String userName="test" ;
-    String password="12345" ;
+    /**二级区域列表**/
+    List<RegionInfo> subregionList=new ArrayList<RegionInfo>();
+    public static String  servAddr = "http://112.12.17.3";
+    public static String userName="dbwl" ;
+    public static String password="12345" ;
+/*    String userName="test" ;
+    String password="12345" ;*/
     ProgressDialog pd;
 	View view;
 	private Dialog mDialog;
+	
+	
+	PullToRefreshView mPullToRefreshView;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		//this.inflater = inflater;
 		Log.d(CLASS_NAME, "onCreateView()");
-		view = inflater.inflate(R.layout.activity_sgv_empy_view, container, false);
+		view = inflater.inflate(R.layout.fragment_camera, container, false);
 		Handler_Inject.injectOrther(this, view);
         getActivity().setTitle("公共");
+    	mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.main_pull_refresh_view);
+		mPullToRefreshView.setOnHeaderRefreshListener(this);
+		mPullToRefreshView.setOnFooterRefreshListener(this);
         
+    	mGridView = (GridView)view.findViewById(R.id.asset_grid);
+
+
+        listdata=new ArrayList<GridItem>() ;
         
-        mGridView = (StaggeredGridView) view.findViewById(R.id.grid_view);
-
-
-    /*    View header = inflater.inflate(R.layout.list_item_header_footer, null);
-        View footer = inflater.inflate(R.layout.list_item_header_footer, null);*/
-/*        TextView txtHeaderTitle = (TextView) header.findViewById(R.id.txt_title);
-        TextView txtFooterTitle =  (TextView) footer.findViewById(R.id.txt_title);
-        txtHeaderTitle.setText("THE HEADER!");
-        txtFooterTitle.setText("THE FOOTER!");*/
-
-/*        mGridView.addHeaderView(header);
-        mGridView.addFooterView(footer);*/
-        mGridView.setEmptyView(view.findViewById(android.R.id.empty));
-        mAdapter = new SampleAdapter(getActivity(), R.id.txt_line1);
+        mAdapter = new StickyGridAdapter(getActivity(), APP.zhsqListdata);
 
 
 
         mGridView.setAdapter(mAdapter);
 
         mGridView.setOnItemClickListener(this);
+        
+        
+		
+		 if (APP.zhsqListdata.size()==0) {
+			 Log.d(CLASS_NAME, "APP.zhsqListdata"+APP.zhsqListdata);
+			 if (APP.NetAvalible) {
+				 pd= ProgressDialog.show(getActivity(),"正在获取摄像头列表...","请等待...");
+				 getCameraListThread();
+			}
+		
+		}
+        
+        
 		return view;
 	}
 
 	@InjectInit
 	private void init(){
 		Log.d(CLASS_NAME, "init()");
-		 pd= ProgressDialog.show(getActivity(),"正在获取摄像头列表...","Please Wait...");
-		fetchLine();
+
+		
 		//login();
 		
 	}
-	
-    private void fillAdapter() {
-        for (CameraInfo info : cameraList) {
-            mAdapter.add(info.name);
-        }
-    }
-	
+     
+     
+     
+     
+     
+     
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        Toast.makeText(getActivity(), "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
-        final Object itemData = cameraList.get(position);
-        //gotoLiveOrPlayBack((CameraInfo) itemData);
-        gotoLive((CameraInfo) itemData);
+        CameraInfo itemData = APP.zhsqListdata.get(position).getCameraInfo();
+        Log.d(CLASS_NAME, "CameraInfo"+itemData.cameraID);
+       //gotoLiveOrPlayBack((CameraInfo) itemData);
+       gotoLive( itemData);
     }
 
+    
+	
+	public List<GridItem>  fillImage(List<GridItem> list){
+		List<GridItem> mlist=list;
+		for (int i = 0; i < mlist.size(); i++) {
+			mlist.get(i).setImageID(ImagesResource.yhxcImages[i%ImagesResource.yhxcImages.length]);
+		}
+		return mlist;
+		
+	}
+    private void fillListData() {
+    	try {
+	
+			        for (CameraInfo info : cameraList) {
+			        	
+			        	GridItem mGridItem = new GridItem(info,"迎晖社区");
+			        	
+			        	mGridItem.setSection(1);
+			          APP.zhsqListdata.add(mGridItem);
+			        }
+			    for (CameraInfo info : cameraList1) {
+			        	
+			        	GridItem mGridItem = new GridItem(info,"桑梓头村");
+			        	
+			        	mGridItem.setSection(2);
+			        	 APP.zhsqListdata.add(mGridItem);
+			        }
+			     for (CameraInfo info : cameraList2) {
+			     	
+			     	GridItem mGridItem = new GridItem(info,"溪口村");
+			     	
+			     	mGridItem.setSection(3);
+			     	 APP.zhsqListdata.add(mGridItem);
+			     }
+			     for (CameraInfo info : cameraList3) {
+			     	
+			     	GridItem mGridItem = new GridItem(info,"茜畴村");
+			     	
+			     	mGridItem.setSection(4);
+			     	 APP.zhsqListdata.add(mGridItem);
+			     }
+			     for (CameraInfo info : cameraList4) {
+			     	
+			     	GridItem mGridItem = new GridItem(info,"三甲院村");
+			     	
+			     	mGridItem.setSection(5);
+			     	 APP.zhsqListdata.add(mGridItem);
+			     }
+			     for (CameraInfo info : cameraList5) {
+			     	
+			     	GridItem mGridItem = new GridItem(info,"召塘里村");
+			     	
+			     	mGridItem.setSection(6);
+			     	 APP.zhsqListdata.add(mGridItem);
+			     }
+			     for (CameraInfo info : cameraList6) {
+			     	
+			     	GridItem mGridItem = new GridItem(info,"下街头村");
+			     	
+			     	mGridItem.setSection(7);
+			     	 APP.zhsqListdata.add(mGridItem);
+			     }
+			    /* for (CameraInfo info : cameraList7) {
+			      	
+			      	GridItem mGridItem = new GridItem(info,"下街头村");
+			      	
+			      	mGridItem.setSection(8);
+			      	 APP.zhsqListdata.add(mGridItem);
+			      }*/
+			     for (CameraInfo info : cameraList8) {
+				      	
+				      	GridItem mGridItem = new GridItem(info,"定午常村");
+				      	
+				      	mGridItem.setSection(9);
+				      	 APP.zhsqListdata.add(mGridItem);
+				      }
+			     
+			     
+			     APP.zhsqListdata=fillImage( APP.zhsqListdata);
+			   for (GridItem itm :  APP.zhsqListdata) {
+				Log.e(CLASS_NAME, "cameraname"+(String) itm.getCameraInfo().name+"cameraid:"+itm.getCameraInfo().cameraID);
+			}
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+    
 	/** handler  所以我们只要
 	 * 在run方法中------发送Message,
 	 * 在Handler里handleMessage----接收Message，
 	 * 通过不同的Message执行不同的任务。  **/
 	
 	
+	
     @SuppressLint("HandlerLeak")				//屏蔽lint错误
     private final class MsgHandler extends Handler {
 
-        @SuppressWarnings("unchecked")
+   
+
+		@SuppressWarnings("unchecked")
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-                case Constants.Login.GET_LINE_IN_PROCESS:
-                	Log.d(CLASS_NAME, "获取线路中。。。");
-                    //showGetLineProgress();
-                break;
-                case Constants.Login.GET_LINE_SUCCESS:
-                	Log.d(CLASS_NAME, "获取线路中成功！");
-                	List<LineInfo> lineList=(List<LineInfo>) msg.obj;
-                	lineInfo=lineList.get(1);
-                	login();
-                    //onGetLineSuccess((List<Object>) msg.obj);
-                break;
-                case Constants.Login.GET_LINE_FAILED:
-                	Log.d(CLASS_NAME, "获取线路中失败！");
-                    //onGetLineFailed();
-                break;
-                case Constants.Login.SHOW_LOGIN_PROGRESS:
-                    //showLoginProgress();
-                	Log.d(CLASS_NAME, "正在登陆。。。");
-                break;
-                case Constants.Login.CANCEL_LOGIN_PROGRESS:
-                    //cancelProgress();
-                break;
-                case Constants.Login.LOGIN_SUCCESS:
-                    // 登录成功
-                	Log.d(CLASS_NAME, "登陆成功");
-                	getControlUnit();
-                   // onLoginSuccess();
-                break;
-                case Constants.Login.LOGIN_FAILED:
-                    // 登录失败
-                   // onLoginFailed();
-                break;
-                case MsgIds.GET_C_F_NONE_FAIL:
-                	Log.d(CLASS_NAME, "获取控制空心列表失败");
-                	break;
-                case MsgIds.GET_C_F_NONE_SUC:
-                	Log.d(CLASS_NAME, "获取控制空心列表成功！");
-                	getRegionList();
-                	break;
                 	
                 case MsgIds.GET_CAMERA_FAIL:
                 	Log.d(CLASS_NAME, "获取摄像头列表失败");
+                	mPullToRefreshView.onFooterRefreshComplete();
+                	mPullToRefreshView.onHeaderRefreshComplete();
+                	Toast.makeText(getActivity(), "请稍后再试", Toast.LENGTH_LONG).show();
+                	fillListData();
+                	pd.dismiss();
                 	break;
+             /*   case prom:
+                	pb.setProgress((Integer)msg.obj);
+                	//textView.setText((Integer)msg.obj+"%");
+                	break;*/
                 case MsgIds.GET_CAMERA_SUC:
                 	Log.d(CLASS_NAME, "获取摄像头列表成功！");
                 	pd.dismiss();
-                	fillAdapter();
-                	break;
-                case MsgIds.GET_REGION_FAIL:
-                	Log.d(CLASS_NAME, "获取区域列表失败");
-                	break;
-                case MsgIds.GET_REGION_SUC:
-                	Log.d(CLASS_NAME, "获取区域列表成功！");
-                	getCameraList();
+                	fillListData();
+                	mAdapter.notifyDataSetChanged();
+                	mPullToRefreshView.onFooterRefreshComplete();
+                	mPullToRefreshView.onHeaderRefreshComplete();
+                	//Intent intent = new Intent (APPStart.this,LoginActivity.class);
+                	//pb.setProgress(100);
+        			//Intent intent = new Intent (APPStart.this,ListActivity.class);
+        			//Intent intent = new Intent (APPStart.this,WallView.class);		
+                	//APPStart.this.finish();
+        			//startActivity(intent);			
+        			
                 	break;
                 	
                 default:
@@ -218,209 +317,90 @@ public class CameraFragment extends Fragment  implements AbsListView.OnItemClick
         }
     }
 	
-        /**
-         * 登录
-         */
-        protected void login() {
-        	Log.d(CLASS_NAME, "login()");
-            
-            /** 开启线程，新建一个线程   **/
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                	
-                    handler.sendEmptyMessage(Constants.Login.SHOW_LOGIN_PROGRESS);
-                    
-
-                    String macAddress = getMac();
-                    Log.d(CLASS_NAME, "登陆参数"+"servAddr"+servAddr+"userName"+userName+"password"+password+"lineInfo.lineID"+lineInfo.lineID+"macAddress"+macAddress);
-                    // 登录请求
-                    boolean ret = VMSNetSDK.getInstance().login(servAddr, userName, password, lineInfo.lineID, macAddress,
-                            servInfo);
-                    if (servInfo == null) {
-                    	Log.d(CLASS_NAME, "servInfo==null");
-                    }
-                    if (servInfo != null) {
-                        // 打印出登录时返回的信息
-                        Log.i(Constants.LOG_TAG, "login ret : " + ret);
-                        Log.i(Constants.LOG_TAG, "login response info[" + "sessionID:" + servInfo.sessionID + ",userID:"
-                                + servInfo.userID + ",magInfo:" + servInfo.magInfo + ",picServerInfo:"
-                                + servInfo.picServerInfo + ",ptzProxyInfo:" + servInfo.ptzProxyInfo + ",userCapability:"
-                                + servInfo.userCapability + ",vmsList:" + servInfo.vmsList + ",vtduInfo:"
-                                + servInfo.vtduInfo + ",webAppList:" + servInfo.webAppList + "]");
-                    }
-                    Log.d(CLASS_NAME, "ret"+ret);
-                     if (ret) {
-                        TempData.getIns().setLoginData(servInfo);
-                        handler.sendEmptyMessage(Constants.Login.LOGIN_SUCCESS);
-                    } else {
-                        handler.sendEmptyMessage(Constants.Login.LOGIN_FAILED);
-                    }
-
-                }
-            }).start();
-            Log.d(CLASS_NAME, "线程开启");
-        }
         
-        
-        /**
-         * 获取线路
-         */
-        protected void fetchLine() {
-        	Log.d(CLASS_NAME, "fetchLine()");
-            new Thread() {
-                public void run() {
-                    handler.sendEmptyMessage(Constants.Login.GET_LINE_IN_PROCESS);
-                   // List<LineInfo> lineInfoList = new ArrayList<LineInfo>();
-                    Log.i(Constants.LOG_TAG, "servAddr:" + servAddr);
-                    boolean ret = VMSNetSDK.getInstance().getLineList(servAddr, lineInfoList);
-                    if (ret) {
-                        Message msg = new Message();
-                        msg.what = Constants.Login.GET_LINE_SUCCESS;
-                        msg.obj = lineInfoList;
-                        //lineInfo=lineInfoList.get(1);
-                        handler.sendMessage(msg);
-                    } else {
-                        handler.sendEmptyMessage(Constants.Login.GET_LINE_FAILED);
-                    }
-                };
-            }.start();
-        }
-        /***
-         * 获取控制中心列表
-         * */
-        protected void  getControlUnit() {
-			Log.d(CLASS_NAME, "getControlUnit()");
-			  new Thread() {
-	                public void run() {
-					  ServInfo loginData = TempData.getIns().getLoginData();
-				        if (loginData == null) {
-				            Log.d(Constants.LOG_TAG, "requestFirstList loginData:" + loginData);
-				            return;
-				        }
-				        String sessionID = loginData.sessionID;
-				        Log.d(CLASS_NAME, "sessionID"+sessionID);
-				        int controlUnitID = 0;// 首次获取数据，表示根目录
-				        int numPerPage = 10000;// 此处传10000，由于实际不可能有那么多，表示获取所有数据
-				        int curPage = 1;
-				       
-				        // 获取控制中心列表
-				        boolean ret = VMSNetSDK.getInstance().getControlUnitList(servAddr, sessionID, controlUnitID, numPerPage,
-				                curPage, ctrlUnitList);
-				        Log.d(Constants.LOG_TAG, "getControlUnitList ret:" + ret);
-				        if (ctrlUnitList != null && !ctrlUnitList.isEmpty()) {
-				            for (ControlUnitInfo info : ctrlUnitList) {
-				                Log.d(Constants.LOG_TAG, "name:" + info.name + ",controlUnitID:" + info.controlUnitID + ",parentID:"
-				                        + info.parentID);
-				            }
-				        }
-				        Log.d(Constants.LOG_TAG, "allData size is " + ctrlUnitList.size());
-				        if (!ret) {
-				            Log.d(Constants.LOG_TAG, "Invoke VMSNetSDK.getControlUnitList failed:");
-				            Message msg = new Message();
-							msg.what = MsgIds.GET_C_F_NONE_FAIL;
-							msg.obj = ctrlUnitList;
-							handler.sendMessage(msg);
-				            
-				        }if (ret) {
-				        	Message msg = new Message();
-							msg.what = MsgIds.GET_C_F_NONE_SUC;
-							msg.obj = ctrlUnitList;
-							handler.sendMessage(msg);
-						}
-			         };
-	         }.start();
-		}
-        /**获取区域列表**/
-        protected void getRegionList() {
-			Log.d(CLASS_NAME, "getRegionList");
-			  new Thread() {
-	                public void run() {
-					  ServInfo loginData = TempData.getIns().getLoginData();
-				        if (loginData == null) {
-				            Log.d(Constants.LOG_TAG, "getRegion loginData:" + loginData);
-				            return;
-				        }
-				        String sessionID = loginData.sessionID;
-				        Log.d(CLASS_NAME, "region sessionID"+sessionID);
-				        int controlUnitID = ctrlUnitList.get(0).controlUnitID;// 首次获取数据，表示根目录
-				        int numPerPage = 10000;// 此处传10000，由于实际不可能有那么多，表示获取所有数据
-				        int curPage = 1;
-				       
-				        Log.d(CLASS_NAME, "controlUnitID"+controlUnitID);
-				        // 2.从控制中心获取区域列表
-				        boolean ret = VMSNetSDK.getInstance().getRegionListFromCtrlUnit(servAddr, sessionID, controlUnitID, numPerPage,
-				                curPage, regionList);
-				        
-				        if (regionList != null && !regionList.isEmpty()) {
-				            for (RegionInfo info : regionList) {
-				                Log.d(CLASS_NAME, "region :" + info.name + ",regionID:" + info.regionID );
-				            }
-				        }
-				        Log.d(Constants.LOG_TAG, "allregion size is " + cameraList.size());
-				        if (!ret) {
-				            Log.d(Constants.LOG_TAG, "Invoke VMSNetSDK.getControlUnitList failed:");
-				            Message msg = new Message();
-							msg.what = MsgIds.GET_REGION_FAIL;
-							msg.obj = regionList;
-							handler.sendMessage(msg);
-				            
-				        }if (ret) {
-				        	Message msg = new Message();
-							msg.what = MsgIds.GET_REGION_SUC;
-							msg.obj = regionList;
-							handler.sendMessage(msg);
-						}
-			         };
-	         }.start();
-		}
         
         /**获取摄像头列表**/
-        protected void getCameraList() {
+        public void getCameraListThread() {
 			Log.d(CLASS_NAME, "getCameraList");
 			  new Thread() {
 	                public void run() {
-					  ServInfo loginData = TempData.getIns().getLoginData();
-				        if (loginData == null) {
-				            Log.d(Constants.LOG_TAG, "getcamera loginData:" + loginData);
-				            return;
-				        }
-				        String sessionID = loginData.sessionID;
-				        Log.d(CLASS_NAME, "r sessionID"+sessionID);
-				        int controlUnitID = regionList.get(0).regionID;// 首次获取数据，表示根目录
-				        int numPerPage = 10000;// 此处传10000，由于实际不可能有那么多，表示获取所有数据
-				        int curPage = 1;
-				       
-				        Log.d(CLASS_NAME, "controlUnitID"+controlUnitID);
-				        // 3.从区域获取摄像头列表
-				       boolean ret = VMSNetSDK.getInstance().getCameraListFromRegion(servAddr, loginData.sessionID, controlUnitID, numPerPage, curPage,
-				                cameraList);
-				        Log.d(CLASS_NAME, "getCameraListFromRegion ret:" + ret);
+	                	
+	                	try {
+							
+						
+			                	if (APP.NetAvalible) {
+			                		cameraList=CameraUtils.getCameraInfoListfrom4Level("0/0/0/0/0");
+								}else {
+								}
+			                
+			                	
+			                	if (APP.NetAvalible) {
+			                		cameraList1=CameraUtils.getCameraInfoListfrom4Level("0/0/1/0/0");
+			                	Log.d(CLASS_NAME, "cameraList1"+cameraList1);
+			                	}else {
+								}
+			                	if (APP.NetAvalible) {
+		
+			                		cameraList2=CameraUtils.getCameraInfoListfrom4Level("0/0/2/0/0");
+			                	}else {
+								}
+			                	if (APP.NetAvalible) {
+			                		cameraList3=CameraUtils.getCameraInfoListfrom4Level("0/0/3/0/0");
+			                	}else {
+								}
+			                	if (APP.NetAvalible) {
+			                		cameraList4=CameraUtils.getCameraInfoListfrom4Level("0/0/3/1/0");
+			                	}else {
+								}
+			                	if (APP.NetAvalible) {
+			                		cameraList5=CameraUtils.getCameraInfoListfrom4Level("0/0/3/2/0");
+			                	}else {
+								}
+			                	if (APP.NetAvalible) {
+			                		cameraList6=CameraUtils.getCameraInfoListfrom4Level("0/0/3/3/0");
+			                	}else {
+								}
+			                /*	if (APP.NetAvalible) {
+			                		cameraList7=CameraUtils.getCameraInfoListfrom4Level("0/0/3/4/0");
+			                	}else {
+								}*/if (APP.NetAvalible) {
+			                		cameraList8=CameraUtils.getCameraInfoListfrom4Level("0/0/4/0/0");
+			                	}else {
+								}
+		
+			                	
+						        Log.d(Constants.LOG_TAG, "allcameraData size is " + cameraList.size());
+						        if (cameraList==null) {
+						            Log.d(Constants.LOG_TAG, "Invoke VMSNetSDK.getControlUnitList failed:");
+						            Message msg = new Message();
+									msg.what = MsgIds.GET_CAMERA_FAIL;
+									msg.obj = cameraList;
+									handler.sendMessage(msg);
+						            
+						        }else {
+						        	Message msg = new Message();
+									msg.what = MsgIds.GET_CAMERA_SUC;
+									msg.obj = cameraList;
+									
+									
+									
+									handler.sendMessage(msg);
+								}
 				        
-				        if (cameraList != null && !cameraList.isEmpty()) {
-				            for (CameraInfo info : cameraList) {
-				                Log.d(CLASS_NAME, "careme :" + info.name + ",cameraType:" + info.cameraType + ",cameraType:"
-				                        + info.cameraType);
-				            }
-				        }
-				        Log.d(Constants.LOG_TAG, "allcameraData size is " + cameraList.size());
-				        if (!ret) {
-				            Log.d(Constants.LOG_TAG, "Invoke VMSNetSDK.getControlUnitList failed:");
-				            Message msg = new Message();
-							msg.what = MsgIds.GET_CAMERA_FAIL;
-							msg.obj = cameraList;
-							handler.sendMessage(msg);
-				            
-				        }if (ret) {
-				        	Message msg = new Message();
-							msg.what = MsgIds.GET_CAMERA_SUC;
-							msg.obj = cameraList;
-							handler.sendMessage(msg);
+	                	} catch (Exception e) {
+							// TODO: handle exception
+	                		e.printStackTrace();
+								handler.sendEmptyMessage(MsgIds.GET_CAMERA_FAIL);
 						}
+	                	
+				        
+				        
 			         };
 	         }.start();
 		}
+	
         
+       
         /**
          * 获取登录设备mac地址
          * 
@@ -430,9 +410,6 @@ public class CameraFragment extends Fragment  implements AbsListView.OnItemClick
             WifiManager wm = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
             String mac = wm.getConnectionInfo().getMacAddress();
             return mac == null ? "" : mac;
-        }
-        public void initUI(){
- 
         }
 
     	private void gotoLiveOrPlayBack(final CameraInfo info) {
@@ -491,5 +468,25 @@ public class CameraFragment extends Fragment  implements AbsListView.OnItemClick
     		TempData.getIns().setCameraInfo(info);
     		getActivity().startActivity(it);
     	}
+    	
+    	@Override
+    	public void onHeaderRefresh(PullToRefreshView view) {
+    		pd= ProgressDialog.show(getActivity(),"正在获取摄像头列表...","请等待...");
+   		 this.getCameraListThread();
+   		 Log.d(CLASS_NAME, "onFooterRefresh");
+    		 //getCameraListThread();
+    		//Toast.makeText(APP.app.getApplicationContext(), "onFooterRefresh", 0).show();
+    		//mPullToRefreshView.onHeaderRefreshComplete();
+    	}
+    	@Override
+    	public void onFooterRefresh(PullToRefreshView view) {
+    		 pd= ProgressDialog.show(getActivity(),"正在获取摄像头列表...","请等待...");
+    		 this.getCameraListThread();
+    		 Log.d(CLASS_NAME, "onFooterRefresh");
+    		//Toast.makeText(APP.app.getApplicationContext(), "onFooterRefresh", 0).show();
+    		//mPullToRefreshView.onFooterRefreshComplete();
+    	}
+
+
 
 }

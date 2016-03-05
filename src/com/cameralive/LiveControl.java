@@ -1,4 +1,4 @@
-package com.live;
+package com.cameralive;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -11,7 +11,6 @@ import org.MediaPlayer.PlayM4.Player.MPSystemTime;
 import org.MediaPlayer.PlayM4.PlayerCallBack.PlayerDisplayCB;
 
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -21,7 +20,7 @@ import com.util.DebugLog;
 import com.util.UtilSDCard;
 
 /**
- * 预览控制层
+ * 预览控制
  * 
  * @author huangweifeng
  * @Data 2013-10-21
@@ -29,19 +28,19 @@ import com.util.UtilSDCard;
 public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     private final String     TAG              = this.getClass().getSimpleName();
     /**
-     * 创建播放库句柄对象
+     * 创建播放库句柄对
      */
     private Player           mPlayerHandler;
     /**
-     * 创建RTSP取流库句柄对象
+     * 创建RTSP取流库句柄对
      */
     private RtspClient       mRtspHandler;
     /**
-     * 播放库播放端口
+     * 播放库播放端
      */
     private int              mPlayerPort      = -1;
     /**
-     * 初始化阶段
+     * 初始化阶
      */
     public final int         LIVE_INIT        = 0;
     /**
@@ -57,11 +56,9 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
      */
     public final int         LIVE_RELEASE     = 3;
     /**
-     * 预览状态
      */
     private int              mLiveState       = LIVE_INIT;
     /**
-     * 播放地址的URL，支持MAG或者流媒体
      */
     private String           mUrl             = "";
     /**
@@ -87,11 +84,11 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
      */
     private boolean          mIsRecord        = false;
     /**
-     * 数据流
+     * 数据
      */
     private ByteBuffer       mStreamHeadDataBuffer;
     /**
-     * 文件输出流
+     * 文件输出
      */
     private FileOutputStream mRecordFileOutputStream;
     /**
@@ -99,18 +96,18 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
      */
     private long             mStreamRate      = 0;
     /**
-     * 设置SD卡使用限度，当小于256M时，提示SD卡内存不足，根据具体情况可以修改
+     * 设置SD卡使用限度，当小56M时，提示SD卡内存不足，根据具体情况可以修改
      */
     private int              mSDCardSize      = 256 * 1024 * 1024;
     /**
-     * 转封装状态
+     * 转封装状
      */
     private int              mTransState      = -1;
     private String           mDeviceUserName  = "";
     private String           mDevicePassword  = "";
 
     /**
-     * 构造函数
+     *函数
      * 
      * @param context
      */
@@ -132,9 +129,9 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     /**
      * 设置预览参数
      * 
-     * @param url 播放地址(过MAG/流媒体)
+     * @param url 播放地址(过MAG/流媒
      * @param name 登录设备的用户名
-     * @param password 登录设备的密码 void
+     * @param password 登录设备的密void
      * @since V1.0
      */
     public void setLiveParams(String url, String name, String password) {
@@ -144,7 +141,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /**
-     * 设置控制层回调接口
+     * 设置控制层回调接
      * 
      * @param liveCallBack
      * @since V1.0
@@ -154,7 +151,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /**
-     * 启动控制层播放
+     * 启动控制层播
      * 
      * @param surfaceView
      * @since V1.0
@@ -173,9 +170,9 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /**
-     * 获取当前播放状态
+     *获取当前播放
      * 
-     * @return LIVE_INIT初始化、LIVE_STREAM取流、LIVE_PLAY播放、LIVE_RELEASE释放资源
+     * @return LIVE_INIT初始化LIVE_STREAM取流、LIVE_PLAY播放、LIVE_RELEASE释放资源
      * @since V1.0
      */
     public int getLiveState() {
@@ -183,7 +180,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /**
-     * 启动RTSP开始取流
+     * 启动RTSP取流
      * 
      * @since V1.0
      */
@@ -256,7 +253,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /**
-     * 关闭播放库 void
+     * 关闭播放void
      * 
      * @since V1.0
      */
@@ -286,8 +283,8 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /*
-     * handle - - 引擎id dataType - - 数据类型，决定data数据的类型,包括DATATYPE_HEADER和DATATYPE_STREAM两种类型 data -
-     * -回调数据,分为：header数据和stream数据，由datatype作区分，header用于初始化播放库 length - - data 数据的长度 timeStamp - - 时间戳（保留） packetNo -
+     * handle - - 引擎id dataType - - 数据类型，决定data数据的类包括DATATYPE_HEADER和DATATYPE_STREAM两种类型 data -
+     * -回调数据,分为：header数据和stream数据，由datatype作区分，header用于初始化播放库 length - - data 数据的长timeStamp - - 时间戳（保留packetNo -
      * -rtp包号（保留） useId - - 用户数据，默认就是引擎id与handle相同
      */
 
@@ -322,7 +319,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     /**
      * 录像数据处理
      * 
-     * @param dataType 数据流
+     * @param dataType 数据
      * @param dataBuffer 数据缓存
      * @param dataLength 数据长度
      */
@@ -398,7 +395,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /**
-     * 开启播放库方法
+     * 播放库方
      * 
      * @param data
      * @param len
@@ -524,7 +521,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     /**
      * 获取JPEG图片数据
      * 
-     * @return JPEG图片的数据.
+     * @return JPEG图片的数
      * @since V1.0
      */
     private byte[] getPictureOnJPEG() {
@@ -661,10 +658,10 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /**
-     * 创建文件夹
+     * 创建文件
      * 
      * @param path 文件路径
-     * @return 文件夹路径
+     * @return 文件夹路
      * @since V1.0
      */
     private String createFileDir(String path) {
@@ -701,7 +698,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /**
-     * 停止写入数据流
+     * 停止写入数据
      * 
      * @since V1.0
      */
@@ -726,7 +723,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
      * 
      * @param filePath 录像文件路径
      * @param fileName 录像文件名称
-     * @param isRpmPackage 是否启用转封装
+     * @param isRpmPackage 是否启用转封
      * @return true-启动录像成功，false-启动录像失败
      * @since V1.0
      */
@@ -747,7 +744,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
         }
 
         if (LIVE_PLAY != mLiveState) {
-            DebugLog.error(TAG, "非播放状态不能录像");
+            DebugLog.error(TAG, "非播放状态不能录");
             return false;
         }
 
@@ -759,7 +756,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
 
         ret = writeStreamHead(mRecordFile);
         if (!ret) {
-            DebugLog.error(TAG, "writeStreamHead() 写文件失败");
+            DebugLog.error(TAG, "writeStreamHead() 写文件失");
             removeRecordFile();
             return false;
         }
@@ -773,7 +770,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
      * 创建录像文件
      * 
      * @param path 文件路径
-     * @param fileName 文件名
+     * @param fileName 文件
      * @return true - 创建成功 or false - 创建失败
      * @since V1.0
      */
@@ -798,10 +795,10 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /**
-     * 写流头文件
+     * 写流头文
      * 
-     * @param file 写入的文件
-     * @return true - 写入头文件成功. false - 写入头文件失败.
+     * @param file 写入的文
+     * @return true - 写入头文件成 false - 写入头文件失
      * @since V1.0
      */
     private boolean writeStreamHead(File file) {
@@ -850,14 +847,14 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /**
-     * 开启音频
+     * 音频
      * 
      * @return boolean
      * @since V1.0
      */
     public boolean startAudio() {
         if (LIVE_PLAY != mLiveState) {
-            DebugLog.error(TAG, "非播放状态不能开启音频");
+            DebugLog.error(TAG, "非播放状态不能开启音");
             return false;
         }
 
@@ -880,7 +877,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
      */
     public boolean stopAudio() {
         if (LIVE_PLAY != mLiveState) {
-            DebugLog.error(TAG, "非播放状态不能关闭音频");
+            DebugLog.error(TAG, "非播放状态不能关闭音");
             return false;
         }
 
@@ -898,7 +895,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     /**
      * 获取JPEG图片大小
      * 
-     * @return JPEG图片的大小.
+     * @return JPEG图片的大
      * @throws PlayerException
      * @throws MediaPlayerException MediaPlayer 异常
      * @since V1.0
@@ -917,7 +914,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /**
-     * 向播放库塞数据
+     * 向播放库塞数
      * 
      * @param data
      * @param len void
@@ -958,7 +955,7 @@ public class LiveControl implements RtspClientCallback, PlayerDisplayCB {
     }
 
     /**
-     * 返回已经播放的流量 void
+     * 返回已经播放的流void
      * 
      * @return long
      * @since V1.0

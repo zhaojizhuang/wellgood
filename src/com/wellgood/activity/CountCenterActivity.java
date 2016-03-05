@@ -1,11 +1,12 @@
 package com.wellgood.activity;
 
-import com.wellgood.fragment.CountCenterFragment;
-import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.MenuItem;
+
+import com.wellgood.application.APP;
+import com.wellgood.fragment.CountCenterFragment;
 
 public class CountCenterActivity extends Activity {
 
@@ -13,9 +14,10 @@ public class CountCenterActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_countcenter);
+		APP.getIns().addActivity(this);
 		//导航栏显示返回
 		ActionBar actionBar = getActionBar();
-
+		setTitle("账户中心");
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setDisplayShowHomeEnabled(true);

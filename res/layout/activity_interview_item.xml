@@ -6,32 +6,12 @@
     android:layout_marginRight="8dp"
     android:layout_marginTop="15dp"
     android:orientation="vertical"
-    tools:context=".ListActivity" >
+    tools:context=".ListActivity" 
+    >
 
 
-    <LinearLayout
-        android:id="@+id/listviewitem"
-        android:clickable="true"
-        android:background="@drawable/selector_btn"
-        android:layout_width="fill_parent"
-    		android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical" >
-
-
-        
-			<!-- 分隔线 -->
-
-        <ImageView
-            
- 			 android:layout_width="fill_parent"
-    		android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/line1" />
-
-        <RelativeLayout
+     <RelativeLayout
+           android:id="@+id/listviewitem"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
 
@@ -47,37 +27,36 @@
                       android:layout_width="fill_parent"
     				android:layout_height="fill_parent"
                     android:layout_margin="5dp"
-                    android:background="@drawable/demo2" />
-
+                    android:background="@drawable/friend_info_mail" />
+<!-- 
                 <ImageView
                     android:id="@+id/user_head"
                      android:layout_width="fill_parent"
     				android:layout_height="fill_parent"
-                    android:src="@drawable/header_frame" />
+                    android:src="@drawable/header_frame" /> -->
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/user_name"
+                android:id="@+id/msg_src"
                  android:layout_width="wrap_content"
     				android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/head_rl"
-                android:text="潘城"
-                android:textColor="@color/paper_name"
-                android:textSize="12sp" />
+                android:text="标题"
+                android:textColor="@color/paper_price"
+                android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/status"
+                android:id="@+id/msg_sum"
                   android:layout_width="wrap_content"
     				android:layout_height="wrap_content"
-                android:layout_below="@id/user_name"
+                android:layout_below="@id/msg_src"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/head_rl"
-                android:text="难度一般"
-                android:textColor="@color/personal_text_color"
-                android:textSize="10sp" />
+                android:text="摘要。。。"
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/type"
@@ -86,21 +65,20 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
-                android:text="内容标题"
-                android:textColor="@color/paper_price"
-                android:textSize="20sp" />
+                android:text="更新时间"
+              
+                android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/modifyDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/head_rl"
-                android:layout_alignRight="@+id/type"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
                 android:text="20150910"
-                android:textColor="@color/paper_list_2"
+                android:textColor="@color/paper_price"
                 android:textSize="12sp" />
 
         </RelativeLayout>
-    </LinearLayout>
 
 </LinearLayout>

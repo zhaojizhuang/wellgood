@@ -1,13 +1,524 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent" 
+    android:orientation="vertical"
+    android:background="@color/bg_color">
+<ScrollView 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="fitCenter"
-       >
-    </ImageView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="vertical">
+      <!-- 热门视频 -->
+
+                       
+            <RelativeLayout
+                android:clickable="true"
+                android:id="@+id/public_remen_title"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" >
+
+                 <ImageView
+                      android:layout_marginLeft="10sp"
+                     android:layout_marginRight="10dp"
+                     android:layout_marginTop="10dp"
+                     android:id="@+id/fenlei_image"
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentBottom="true"
+                        android:scaleType="fitXY"
+                     android:src="@drawable/public_remen" />
+
+                <!-- <ImageView
+                    android:id="@+id/fenlei_image_ahp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fenlei_image"
+                     android:layout_alignRight="@+id/fenlei_image"
+                    android:layout_alignTop="@+id/fenlei_image"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/fenlei_image"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/black35" /> -->
+
+                <RelativeLayout
+                      android:layout_marginLeft="10sp"
+                     android:layout_marginRight="10dp"
+                    android:id="@+id/fenlei_item_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/fenlei_image"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/black35" 
+                      >
+
+                    <TextView
+                        android:id="@+id/fenlei_item_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:textSize="23sp"
+                        android:text="热门视频"
+                        android:textColor="@color/red"
+                        />
+
+                    <TextView
+                         android:layout_marginLeft="10sp"
+                     android:layout_marginRight="10dp"
+                        android:id="@+id/fenlei_item_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="分类详情"
+                        android:textColor="@color/public_text_info_color"
+                        android:textSize="20sp" />
+
+              </RelativeLayout>
+
+            </RelativeLayout>
+       
+          <!-- 热门视频end -->
+                <!-- 四大板块 -->
+		       <LinearLayout
+		    android:id="@+id/public_grid"
+		    android:layout_width="fill_parent"
+		    android:layout_height="120dp"
+		    android:layout_gravity="center"
+		    android:orientation="horizontal"
+		    >
+		      <RelativeLayout
+		          android:clickable="true"
+                android:id="@+id/public_zhsq"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                   >
+
+                 <ImageView
+                     android:layout_marginLeft="5dp"
+                     android:layout_marginRight="5dp"
+                     android:layout_marginTop="5dp"
+                     android:id="@+id/fenlei_image"
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentBottom="true"
+                        android:scaleType="fitXY"
+                     android:src="@drawable/zhsq" />
+
+                <!-- <ImageView
+                    android:id="@+id/fenlei_image_ahp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fenlei_image"
+                       android:layout_alignRight="@+id/fenlei_image"
+                    android:layout_alignTop="@+id/fenlei_image"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/fenlei_image"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/black35" /> -->
+
+                 <RelativeLayout
+                     android:id="@+id/fenlei_item_bottom"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/thumb_height"
+                     android:layout_alignBottom="@+id/fenlei_image"
+                     android:layout_alignLeft="@+id/fenlei_image"
+                     android:layout_alignRight="@+id/fenlei_image"
+                     android:background="@drawable/black35" >
+
+                    <TextView
+                        android:id="@+id/fenlei_item_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="智慧社区"
+                        android:textColor="@color/public_text_info_color"
+                        android:textSize="20sp" />
+
+              </RelativeLayout> 
+
+            </RelativeLayout>
+		          
+		        
+		      
+		         <RelativeLayout
+		             android:clickable="true"
+                android:id="@+id/public_zhxy"
+                android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+                android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+                 <ImageView
+                     android:layout_marginLeft="5dp"
+                     android:layout_marginRight="5dp"
+                     android:layout_marginTop="5dp"
+                     android:id="@+id/fenlei_image"
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentBottom="true"
+                        android:scaleType="fitXY"
+                     android:src="@drawable/zhxy" />
+
+                <!-- <ImageView
+                    android:id="@+id/fenlei_image_ahp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fenlei_image"
+                       android:layout_alignRight="@+id/fenlei_image"
+                    android:layout_alignTop="@+id/fenlei_image"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/fenlei_image"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/black35" /> -->
+
+                 <RelativeLayout
+                     android:id="@+id/fenlei_item_bottom"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/thumb_height"
+                     android:layout_alignBottom="@+id/fenlei_image"
+                     android:layout_alignLeft="@+id/fenlei_image"
+                     android:layout_alignRight="@+id/fenlei_image"
+                     android:background="@drawable/black35" >
+
+                    <TextView
+                        android:id="@+id/fenlei_item_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="智慧校园"
+                        android:textColor="@color/public_text_info_color"
+                        android:textSize="20sp" />
+
+              </RelativeLayout> 
+
+            </RelativeLayout>
+		        
+		        
+		    </LinearLayout>
+		    
+		                     <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            >
+              <RelativeLayout
+                android:id="@+id/public_zhjt"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                   >
+
+                 <ImageView
+                     android:layout_marginLeft="5dp"
+                     android:layout_marginRight="5dp"
+                     android:layout_marginTop="5dp"
+                     android:id="@+id/fenlei_image"
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentBottom="true"
+                        android:scaleType="fitXY"
+                     android:src="@drawable/public_bottom1" />
+
+                <!-- <ImageView
+                    android:id="@+id/fenlei_image_ahp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fenlei_image"
+                       android:layout_alignRight="@+id/fenlei_image"
+                    android:layout_alignTop="@+id/fenlei_image"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/fenlei_image"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/black35" /> -->
+
+                 <RelativeLayout
+                     android:id="@+id/fenlei_item_bottom"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/thumb_height"
+                     android:layout_alignBottom="@+id/fenlei_image"
+                     android:layout_alignLeft="@+id/fenlei_image"
+                     android:layout_alignRight="@+id/fenlei_image"
+                     android:background="@drawable/black35" >
+
+                    <TextView
+                        android:id="@+id/fenlei_item_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="智慧交通"
+                        android:textColor="@color/public_text_info_color"
+                        android:textSize="20sp" />
+
+              </RelativeLayout> 
+
+            </RelativeLayout>
+                  
+                
+              
+                 <RelativeLayout
+                     android:clickable="true"
+                android:id="@+id/public_zhly"
+                android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+                android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+                 <ImageView
+                     android:layout_marginLeft="5dp"
+                     android:layout_marginRight="5dp"
+                     android:layout_marginTop="5dp"
+                     android:id="@+id/fenlei_image"
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentBottom="true"
+                        android:scaleType="fitXY"
+                     android:src="@drawable/zhlv" />
+
+                <!-- <ImageView
+                    android:id="@+id/fenlei_image_ahp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fenlei_image"
+                       android:layout_alignRight="@+id/fenlei_image"
+                    android:layout_alignTop="@+id/fenlei_image"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/fenlei_image"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/black35" /> -->
+
+                 <RelativeLayout
+                     android:id="@+id/fenlei_item_bottom"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/thumb_height"
+                     android:layout_alignBottom="@+id/fenlei_image"
+                     android:layout_alignLeft="@+id/fenlei_image"
+                     android:layout_alignRight="@+id/fenlei_image"
+                     android:background="@drawable/black35" >
+
+                    <TextView
+                        android:id="@+id/fenlei_item_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="智慧旅游"
+                        android:textColor="@color/public_text_info_color"
+                        android:textSize="20sp" />
+
+              </RelativeLayout> 
+
+            </RelativeLayout>
+                
+                
+            </LinearLayout>
+
+            <TextView
+                android:layout_margin="10dp"
+                android:text="推荐视频"
+                android:textSize="20sp"
+                android:textColor="#dd9140"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                 />
+            <!-- 下面的三个视频 -->
+                             <LinearLayout
+            android:id="@+id/public_grid"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            >
+              <RelativeLayout
+                  android:clickable="true"
+                  
+                android:id="@+id/public_bottom_camera1"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                   >
+
+                 <ImageView
+                     android:layout_marginLeft="10sp"
+                     android:layout_marginRight="10dp"
+                     android:layout_marginTop="10dp"
+                     android:id="@+id/fenlei_image"
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentBottom="true"
+                        android:scaleType="fitXY"
+                     android:src="@drawable/public_bottom1" />
+
+                <!-- <ImageView
+                    android:id="@+id/fenlei_image_ahp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fenlei_image"
+                       android:layout_alignRight="@+id/fenlei_image"
+                    android:layout_alignTop="@+id/fenlei_image"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/fenlei_image"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/black35" /> -->
+
+                 <RelativeLayout
+                     android:layout_marginLeft="10sp"
+                     android:layout_marginRight="10dp"
+                    android:id="@+id/fenlei_item_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/thumb_height"
+                    android:layout_alignBottom="@+id/fenlei_image"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/black35" 
+                      >
+
+
+                    <TextView
+                        android:id="@+id/fenlei_item_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="中山大桥"
+                        android:textColor="@color/public_text_info_color"
+                        android:textSize="15sp" />
+
+              </RelativeLayout> 
+
+            </RelativeLayout>
+                  
+                
+              
+                 <RelativeLayout
+                     android:clickable="true"
+                android:id="@+id/public_bottom_camera2"
+                android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+                android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+                 <ImageView
+                     android:layout_marginLeft="10sp"
+                     android:layout_marginRight="10dp"
+                     android:layout_marginTop="10dp"
+                     android:id="@+id/fenlei_image"
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentBottom="true"
+                        android:scaleType="fitXY"
+                     android:src="@drawable/qzgy" />
+
+                <!-- <ImageView
+                    android:id="@+id/fenlei_image_ahp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fenlei_image"
+                       android:layout_alignRight="@+id/fenlei_image"
+                    android:layout_alignTop="@+id/fenlei_image"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/fenlei_image"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/black35" /> -->
+
+                 <RelativeLayout
+                     android:layout_marginLeft="10sp"
+                     android:layout_marginRight="10dp"
+                    android:id="@+id/fenlei_item_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/thumb_height"
+                    android:layout_alignBottom="@+id/fenlei_image"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/black35" 
+                      >
+
+
+                    <TextView
+                        android:id="@+id/fenlei_item_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="亲子公园"
+                        android:textColor="@color/public_text_info_color"
+                        android:textSize="15sp" />
+
+              </RelativeLayout> 
+
+            </RelativeLayout>
+                
+                                 <RelativeLayout
+                                     android:clickable="true"
+                android:id="@+id/public_bottom_camera3"
+                android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+                android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+                 <ImageView
+                     android:layout_marginLeft="10sp"
+                     android:layout_marginRight="10dp"
+                     android:layout_marginTop="10dp"
+                     android:id="@+id/fenlei_image"
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentBottom="true"
+                        android:scaleType="fitXY"
+                     android:src="@drawable/public_bottom3" />
+
+                <!-- <ImageView
+                    android:id="@+id/fenlei_image_ahp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fenlei_image"
+                       android:layout_alignRight="@+id/fenlei_image"
+                    android:layout_alignTop="@+id/fenlei_image"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/fenlei_image"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/black35" /> -->
+
+                 <RelativeLayout
+                     android:layout_marginLeft="10sp"
+                     android:layout_marginRight="10dp"
+                    android:id="@+id/fenlei_item_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/thumb_height"
+                    android:layout_alignBottom="@+id/fenlei_image"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/black35" 
+                      >
+
+
+                    <TextView
+                        android:id="@+id/fenlei_item_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="人民路"
+                        android:textColor="@color/public_text_info_color"
+                        android:textSize="15sp" />
+
+              </RelativeLayout> 
+
+            </RelativeLayout>
+            </LinearLayout>
+    </LinearLayout>
+    <!--  <com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools" -->
+   
+    
+    </ScrollView>
 </LinearLayout>

@@ -1,8 +1,7 @@
-package com.live;
-
-import java.util.Random;
+package com.cameralive;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -17,8 +17,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 
 import com.hik.mcrsdk.util.CLog;
@@ -27,8 +25,6 @@ import com.hikvision.vmsnetsdk.DeviceInfo;
 import com.hikvision.vmsnetsdk.RealPlayURL;
 import com.hikvision.vmsnetsdk.VMSNetSDK;
 import com.util.UIUtil;
-import com.util.UtilAudioPlay;
-import com.util.UtilFilePath;
 import com.wellgood.activity.R;
 import com.wellgood.camera.Config;
 import com.wellgood.camera.Constants;
@@ -40,38 +36,38 @@ import com.wellgood.camera.TempData;
  * @author huangweifeng
  * @Data 2013-10-21
  */
-public class CopyOfLiveActivity extends Activity implements OnClickListener, OnCheckedChangeListener, Callback, LiveCallBack {
+public class LiveActivity extends Activity implements OnClickListener, Callback, LiveCallBack {
     private static final String TAG             = "LiveActivity";
     /**
-     * 开始播放按钮
+     * 播放按钮
      */
     private Button              mStartBtn;
     /**
      * 停止播放按钮
      */
-    private Button              mStopBtn;
+    //private Button              mStopBtn;
     /**
      * 抓拍按钮
      */
-    private Button              mCaptureBtn;
+    //private Button              mCaptureBtn;
     /**
      * 录像按钮
      */
-    private Button              mRecordBtn;
+   // private Button              mRecordBtn;
     /**
      * 音频按钮
      */
-    private Button              mAudioBtn;
+   // private Button              mAudioBtn;
     /**
      * 码流切换
      */
-    private RadioGroup          mRadioGroup;
+   // private RadioGroup          mRadioGroup;
     /**
      * 码流类型
      */
-    private int                 mStreamType     = -1;
+    private int                 mStreamType     = ConstantLive.SUB_STREAM;//SUB_STREAM;MAIN_STREAM
     /**
-     * 通过VMSNetSDK返回的预览地址对象
+     * 通过VMSNetSDK返回的预览地
      */
     private RealPlayURL         mRealPlayURL;
     /**
@@ -79,15 +75,15 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
      */
     private String              mName;
     /**
-     * 登录设备的密码
+     * 登录设备的密
      */
     private String              mPassword;
     /**
-     * 控制层对象
+     * 控制层对
      */
     private LiveControl         mLiveControl;
     /**
-     * 播放视频的控件对象
+     * 播放视频的控件对
      */
     private SurfaceView         mSurfaceView;
     /**
@@ -99,7 +95,7 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
      */
     private Handler             mMessageHandler = new MyHandler();
     /**
-     * 音频是否开启
+     * 音频是否
      */
     private boolean             mIsAudioOpen;
     /**
@@ -111,7 +107,7 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
      */
     private long                mStreamRate     = 0;
     /**
-     * 监控点信息对象
+     * 监控点信息对
      */
     private CameraInfo          cameraInfo;
     /**
@@ -127,25 +123,33 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
      */
     private Button              stopCtrlBtn;
     /**
-     * 云台控制对话框
+     * 云台控制对话
      */
     private AlertDialog         mDialog;
     private String              mDeviceID       = "";
 
     private VMSNetSDK           mVmsNetSDK      = null;
+    private static String userName="dbwl";
+    private static String userPassword="12345";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live);
+		//导航栏显示返
+		ActionBar actionBar = getActionBar();
 
+		actionBar.setHomeButtonEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setDisplayShowHomeEnabled(true);
         initData();
 
         initUI();
+        startBtnOnClick();
 
     }
 
-    /**
+    /**@author Administrator
      * 初始化网络库和控制层对象
      * 
      * @since V1.0
@@ -169,8 +173,8 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
             mName = deviceInfo.userName;
             mPassword = deviceInfo.password;
         } else {
-            mName = "test";
-            mPassword = "12345";
+            mName = userName;
+            mPassword = userPassword;
         }
 
         Log.d(TAG, "mName is " + mName + "---" + mPassword + "-----" + cameraInfo.deviceID);
@@ -180,30 +184,11 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
     }
 
     /**
-     * 初始化控件
+     * 初始化控
      * 
      * @since V1.0
      */
     private void initUI() {
-        mStartBtn = (Button) findViewById(R.id.liveStartBtn);
-        mStartBtn.setOnClickListener(this);
-        mStopBtn = (Button) findViewById(R.id.liveStopBtn);
-        mStopBtn.setOnClickListener(this);
-        mCaptureBtn = (Button) findViewById(R.id.liveCaptureBtn);
-        mCaptureBtn.setOnClickListener(this);
-
-        mRecordBtn = (Button) findViewById(R.id.liveRecordBtn);
-        mRecordBtn.setOnClickListener(this);
-        mRecordBtn.setText("启动录像");
-
-        mAudioBtn = (Button) findViewById(R.id.liveAudioBtn);
-        mAudioBtn.setOnClickListener(this);
-        mAudioBtn.setText("开启音频");
-
-        mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        mRadioGroup.setOnCheckedChangeListener(this);
-        mRadioGroup.check(R.id.magRadio);
-        mStreamType = ConstantLive.MAG;
 
         mSurfaceView = (SurfaceView) findViewById(R.id.surfaceView);
         mSurfaceView.getHolder().addCallback(this);
@@ -211,33 +196,15 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
         mProgressBar = (ProgressBar) findViewById(R.id.liveProgressBar);
         mProgressBar.setVisibility(View.INVISIBLE);
 
-        cloudCtrlArea = (RelativeLayout) findViewById(R.id.cloud_area);
-        // 云台控制需要根据权限来显示
-        cloudCtrlArea.setVisibility(cameraInfo.isPTZControl ? View.VISIBLE : View.GONE);
-        startCtrlBtn = (Button) findViewById(R.id.start_ctrl);
-        stopCtrlBtn = (Button) findViewById(R.id.stop_ctrl);
-        startCtrlBtn.setOnClickListener(this);
-        stopCtrlBtn.setOnClickListener(this);
+        //cloudCtrlArea = (RelativeLayout) findViewById(R.id.cloud_area);
+        // 云台控制根据权限来显
+        //cloudCtrlArea.setVisibility(cameraInfo.isPTZControl  View.VISIBLE : View.GONE);
+       // startCtrlBtn = (Button) findViewById(R.id.start_ctrl);
+       // stopCtrlBtn = (Button) findViewById(R.id.stop_ctrl);
+        //startCtrlBtn.setOnClickListener(this);
+       // stopCtrlBtn.setOnClickListener(this);
     }
 
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (group.getId() == R.id.radioGroup) {
-            switch (group.getCheckedRadioButtonId()) {
-                case R.id.mainRadio:
-                    mStreamType = ConstantLive.MAIN_STREAM;
-                break;
-
-                case R.id.subRadio:
-                    mStreamType = ConstantLive.SUB_STREAM;
-                break;
-
-                case R.id.magRadio:
-                    mStreamType = ConstantLive.MAG;
-                break;
-            }
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -250,17 +217,17 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
                 stopBtnOnClick();
             break;
 
-            case R.id.liveCaptureBtn:
+         /*   case R.id.liveCaptureBtn:
                 captureBtnOnClick();
-            break;
+            break;*/
 
-            case R.id.liveRecordBtn:
-                recordBtnOnClick();
+           /* case R.id.liveRecordBtn:
+                recordBtnOnClick();-
             break;
 
             case R.id.liveAudioBtn:
                 audioBtnOnClick();
-            break;
+            break;*/
             case R.id.start_ctrl:
                 startCloudCtrl();
             break;
@@ -273,7 +240,7 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
     }
 
     /**
-     * 开始云台控制，弹出控制界面
+     * 云台控制，弹出控制界
      */
     private void startCloudCtrl() {
 
@@ -292,9 +259,9 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
     }
 
     /**
-     * 发送云台控制命令
+     *云台控制命令
      * 
-     * @param gestureID 1-云台转上 、2-云台转下 、3-云台转左 、4-云台转右、 11-云台左上 、12-云台右上 13-云台左下 、14-云台右下、7-镜头拉近、8-镜头拉远、9-镜头近焦、10-镜头远焦
+     * @param gestureID 1-云台转上 云台转下 -云台转左 -云台转右11-云台左上2-云台右上 13-云台左下 4-云台右下-镜头拉近-镜头拉远-镜头近焦0-镜头远焦
      */
     private void sendCtrlCmd(final int gestureID) {
         new Thread(new Runnable() {
@@ -302,11 +269,9 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
             @Override
             public void run() {
                 String sessionID = TempData.getIns().getLoginData().sessionID;
-                // 云台控制速度 取值范围(1-10)
                 int speed = 5;
                 Log.i(Constants.LOG_TAG, "ip:" + cameraInfo.acsIP + ",port:" + cameraInfo.acsPort + ",isPTZControl:"
                         + cameraInfo.isPTZControl);
-                // 发送控制命令
                 boolean ret = VMSNetSDK.getInstance().sendStartPTZCmd(cameraInfo.acsIP, cameraInfo.acsPort, sessionID,
                         cameraInfo.cameraID, gestureID, speed, 600);
                 Log.i(Constants.LOG_TAG, "sendStartPTZCmd ret:" + ret);
@@ -355,10 +320,10 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
 
     /**
      * 该方法是获取播放地址的，当mStreamType=2时，获取的是MAG，当mStreamType =1时获取的子码流，当mStreamType = 0时获取的是主码流
-     * 由于该方法中部分参数是监控点的属性，所以需要先获取监控点信息，具体获取监控点信息的方法见resourceActivity。
+     * 由于该方法中部分参数是监控点的属性，先获取监控点信息，具体获取监控点信息的方法见resourceActivity
      * 
-     * @param streamType 2、表示MAG取流方式；1、表示子码流取流方式；0、表示主码流取流方式；
-     * @return String 播放地址 ：2、表示返回的是MAG的播放地址;1、表示返回的是子码流的播放地址；0、表示返回的是主码流的播放地址。
+     * @param streamType 2、表示MAG取流方式、表示子码流取流方式、表示主码流取流方式
+     * @return String 播放地址 、表示返回的是MAG的播放地1、表示返回的是子码流的播放地表示返回的是主码流的播放
      * @since V1.0
      */
     private String getPlayUrl(int streamType) {
@@ -372,8 +337,9 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
             return url;
         }
         if (streamType == 2) {
-            // TODO 原有代码streamType传0
+            // TODO 原有代码streamType
             VMSNetSDK.getInstance().getRealPlayURL(mAddress, mSessionID, cameraInfo.cameraID, streamType, mRealPlayURL);
+            Log.d("111111", "cameraInfo.cameraID"+cameraInfo.cameraID);
             if (null == mRealPlayURL) {
                 Log.d(TAG, "getPlayUrl():: mRealPlayURL is null");
                 return "";
@@ -383,6 +349,7 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
             Log.d(TAG, "getPlayUrl():: url is " + url);
         } else {
             VMSNetSDK.getInstance().getRealPlayURL(mAddress, mSessionID, cameraInfo.cameraID, streamType, mRealPlayURL);
+            Log.d("111111", "cameraInfo.cameraID"+cameraInfo.cameraID);
             if (null == mRealPlayURL) {
                 Log.d(TAG, "getPlayUrl():: mRealPlayURL is null");
                 return "";
@@ -393,24 +360,25 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
         }
         DeviceInfo deviceInfo = new DeviceInfo();
         boolean ret = VMSNetSDK.getInstance().getDeviceInfo(mAddress, mSessionID, cameraInfo.deviceID, deviceInfo);
+        Log.d(TAG, "cameraInfo.deviceID"+cameraInfo.deviceID);
         Log.d(TAG,"ret is : " + ret);
         if (ret && deviceInfo != null) {
             mName = deviceInfo.userName;
             mPassword = deviceInfo.password;
         } else {
-            mName = "test";
-            mPassword = "12345";
+            mName = userName;
+            mPassword = userPassword;
             Log.e(TAG, "getPlayUrl():: deviceInfo is error");
         }
         
         if(null == mName || "".equals(mName))
         {
-            mName = "test";
+            mName = userName;
         }
         
         if(null == mPassword || "".equals(mPassword))
         {
-            mPassword = "12345";
+            mPassword = userPassword;
         }
         
         Log.d(TAG, "mName is " + mName + "---" + mPassword + "-----" + cameraInfo.deviceID);
@@ -429,78 +397,16 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
     }
 
     /**
-     * 抓拍 void
-     * 
-     * @since V1.0
-     */
-    private void captureBtnOnClick() {
-        if (null != mLiveControl) {
-            // 随即生成一个1到10000的数字，用于抓拍图片名称的一部分，区分图片，开发者可以根据实际情况修改区分图片名称的方法
-            int recordIndex = new Random().nextInt(10000);
-            boolean ret = mLiveControl.capture(UtilFilePath.getPictureDirPath().getAbsolutePath(), "Picture"
-                    + recordIndex + ".jpg");
-            if (ret) {
-                UIUtil.showToast(CopyOfLiveActivity.this, "抓拍成功");
-                UtilAudioPlay.playAudioFile(CopyOfLiveActivity.this, R.raw.paizhao);
-            } else {
-                UIUtil.showToast(CopyOfLiveActivity.this, "抓拍失败");
-                Log.e(TAG, "captureBtnOnClick():: 抓拍失败");
-            }
-        }
-    }
-
-    /**
      * 录像 void
      * 
      * @since V1.0
      */
-    private void recordBtnOnClick() {
-        if (null != mLiveControl) {
-            if (!mIsRecord) {
-                // 随即生成一个1到10000的数字，用于录像名称的一部分，区分图片，开发者可以根据实际情况修改区分录像名称的方法
-                int recordIndex = new Random().nextInt(10000);
-                mLiveControl.startRecord(UtilFilePath.getVideoDirPath().getAbsolutePath(), "Video" + recordIndex
-                        + ".mp4");
-                mIsRecord = true;
-                UIUtil.showToast(CopyOfLiveActivity.this, "启动录像成功");
-                mRecordBtn.setText("停止录像");
-            } else {
-                mLiveControl.stopRecord();
-                mIsRecord = false;
-                UIUtil.showToast(CopyOfLiveActivity.this, "停止录像成功");
-                mRecordBtn.setText("开始录像");
-            }
-        }
-    }
 
     /**
      * 音频 void
      * 
      * @since V1.0
      */
-    private void audioBtnOnClick() {
-        if (null != mLiveControl) {
-            if (mIsAudioOpen) {
-                mLiveControl.stopAudio();
-                mIsAudioOpen = false;
-                UIUtil.showToast(CopyOfLiveActivity.this, "关闭音频");
-                mAudioBtn.setText("开启音频");
-            } else {
-                boolean ret = mLiveControl.startAudio();
-                if (!ret) {
-                    mIsAudioOpen = false;
-                    UIUtil.showToast(CopyOfLiveActivity.this, "开启音频失败");
-                    mAudioBtn.setText("开启音频");
-                } else {
-                    mIsAudioOpen = true;
-                    // 开启音频成功，并不代表一定有声音，需要设备开启声音。
-                    UIUtil.showToast(CopyOfLiveActivity.this, "开启音频成功");
-                    mAudioBtn.setText("关闭音频");
-                }
-            }
-        }
-
-    }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
@@ -516,7 +422,7 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
     public void surfaceDestroyed(SurfaceHolder holder) {
         if (null != mLiveControl) {
             if (mIsRecord) {
-                mRecordBtn.setText("开始录像");
+               // mRecordBtn.setText("录像");
                 mLiveControl.stopRecord();
                 mIsRecord = false;
             }
@@ -530,7 +436,7 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
     }
 
     /**
-     * 返回已经播放的流量 void
+     * 返回已经播放的流void
      * 
      * @return long
      * @since V1.0
@@ -540,7 +446,7 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
     }
 
     /**
-     * 发送消息
+     *
      * 
      * @param i void
      * @since V1.0
@@ -554,7 +460,7 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
     }
 
     /**
-     * 消息类
+     * 消息
      * 
      * @author huangweifeng
      * @Data 2013-10-23
@@ -564,29 +470,29 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
         public void handleMessage(Message msg) {
             switch (msg.arg1) {
                 case ConstantLive.RTSP_SUCCESS:
-                    UIUtil.showToast(CopyOfLiveActivity.this, "启动取流成功");
+                    UIUtil.showToast(LiveActivity.this, "启动取流成功");
                 break;
 
                 case ConstantLive.STOP_SUCCESS:
-                    UIUtil.showToast(CopyOfLiveActivity.this, "停止成功");
+                    UIUtil.showToast(LiveActivity.this, "停止成功");
                 break;
 
                 case ConstantLive.START_OPEN_FAILED:
-                    UIUtil.showToast(CopyOfLiveActivity.this, "开启播放库失败");
+                    UIUtil.showToast(LiveActivity.this, "播放播放库失");
                     if (null != mProgressBar) {
                         mProgressBar.setVisibility(View.GONE);
                     }
                 break;
 
                 case ConstantLive.PLAY_DISPLAY_SUCCESS:
-                    UIUtil.showToast(CopyOfLiveActivity.this, "播放成功");
+                    UIUtil.showToast(LiveActivity.this, "播放成功");
                     if (null != mProgressBar) {
                         mProgressBar.setVisibility(View.GONE);
                     }
                 break;
 
                 case ConstantLive.RTSP_FAIL:
-                    UIUtil.showToast(CopyOfLiveActivity.this, "RTSP链接失败");
+                    UIUtil.showToast(LiveActivity.this, "RTSP链接失败");
                     if (null != mProgressBar) {
                         mProgressBar.setVisibility(View.GONE);
                     }
@@ -596,20 +502,32 @@ public class CopyOfLiveActivity extends Activity implements OnClickListener, OnC
                 break;
 
                 case ConstantLive.GET_OSD_TIME_FAIL:
-                    UIUtil.showToast(CopyOfLiveActivity.this, "获取OSD时间失败");
+                    UIUtil.showToast(LiveActivity.this, "获取OSD时间失败");
                 break;
 
                 case ConstantLive.SD_CARD_UN_USEABLE:
-                    UIUtil.showToast(CopyOfLiveActivity.this, "SD卡不可用");
+                    UIUtil.showToast(LiveActivity.this, "SD卡不可用");
                 break;
 
                 case ConstantLive.SD_CARD_SIZE_NOT_ENOUGH:
-                    UIUtil.showToast(CopyOfLiveActivity.this, "SD卡空间不足");
+                    UIUtil.showToast(LiveActivity.this, "SD卡空间不");
                 break;
                 case ConstantLive.CAPTURE_FAILED_NPLAY_STATE:
-                    UIUtil.showToast(CopyOfLiveActivity.this, "非播放状态不能抓拍");
+                    UIUtil.showToast(LiveActivity.this, "非播放状态不能抓");
                 break;
             }
         }
     }
+    
+    
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+		default:
+			return super.onOptionsItemSelected(item);
+
+		}
+}
 }

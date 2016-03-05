@@ -1,6 +1,5 @@
 package com.wellgood.update;
 
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,26 +9,26 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
-import com.wellgood.activity.R;
-
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Build.VERSION;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.wellgood.activity.R;
+import com.wellgood.contract.Contract;
 
 /**
  *@author coolszy
@@ -66,7 +65,7 @@ public class UpdateManager
 	/**
 	*version.xml放在服务器上
 	 * **/
-	private String strUrl="http://www.hzwellgood.com/updateXML/version.xml";
+	private String strUrl=Contract.updateXML_PATH+"/version.xml";
 	private Handler mHandler = new Handler()
 	{
 		public void handleMessage(Message msg)
@@ -247,6 +246,11 @@ public class UpdateManager
 				{
 					//可更新
 					mHandler.sendEmptyMessage(UPDATE_AVALIBLE);
+					
+				}
+				else {
+					//bu可更新
+					mHandler.sendEmptyMessage(UPDATE_UNAVALIBLE);
 				}
 			}
 			else {

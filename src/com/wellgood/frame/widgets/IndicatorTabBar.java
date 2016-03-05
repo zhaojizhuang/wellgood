@@ -3,8 +3,6 @@ package com.wellgood.frame.widgets;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.wellgood.activity.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -23,6 +21,8 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.wellgood.activity.R;
 
 /**
  * Indicator TabBar
